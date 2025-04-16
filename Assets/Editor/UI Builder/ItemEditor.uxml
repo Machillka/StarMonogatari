@@ -4,14 +4,14 @@
         <engine:VisualElement name="ItemList" style="flex-grow: 1; width: 30%; height: 100%; background-color: rgba(0, 0, 0, 0); padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;">
             <engine:VisualElement name="Header" style="flex-grow: 0; flex-direction: row; height: 33px; width: 100%; align-items: stretch; justify-content: space-between;">
                 <engine:Label text="ItemList" style="font-size: 20px; color: rgb(255, 255, 255); -unity-text-align: middle-center; -unity-font-style: bold;" />
-                <engine:Button text="+" style="width: 5px; height: auto;" />
+                <engine:Button text="+" name="AddItemButton" style="width: auto; height: auto;" />
             </engine:VisualElement>
-            <engine:ListView name="ListView" show-bound-collection-size="true" reorderable="true" show-border="true" style="flex-grow: 1;" />
+            <engine:ListView name="ListView" show-bound-collection-size="true" reorderable="true" show-border="true" style="flex-grow: 1; align-content: auto; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;" />
         </engine:VisualElement>
         <engine:ScrollView name="ItemDetails" style="flex-grow: 1; width: 70%; height: 100%;">
             <engine:VisualElement name="Header" style="flex-grow: 0; flex-direction: row; height: 33px; width: 100%; align-items: stretch; justify-content: space-between;">
                 <engine:Label text="Details Information" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
-                <engine:Button text="Delete" />
+                <engine:Button text="Delete" name="DeleteButton" />
             </engine:VisualElement>
             <engine:VisualElement name="Content" style="flex-grow: 0; width: 100%; height: 565px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
                 <engine:VisualElement name="Row1" style="flex-grow: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
@@ -21,7 +21,7 @@
                         <engine:VisualElement name="General" style="flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 100%; height: 100%; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
                             <engine:IntegerField label="ID" value="0" name="ItemID" style="align-self: stretch; font-size: 12px;" />
                             <engine:TextField label="Name" name="ItemName" />
-                            <editor:EnumFlagsField label="Type" value="DynamicTransform" type="UnityEngine.UIElements.UsageHints, UnityEngine.UIElementsModule" name="ItemType" style="font-size: 12px;" />
+                            <engine:EnumField label="ItemType" value="Center" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="ItemType" />
                             <editor:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="ItemIcon" />
                             <editor:ObjectField label="OnWorld Sprite" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="ItemSprite" style="font-size: 12px;" />
                         </engine:VisualElement>
@@ -36,14 +36,14 @@
                 <engine:VisualElement name="Row3" style="flex-grow: 0; flex-direction: row; justify-content: space-around; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
                     <engine:VisualElement name="Left" style="flex-grow: 1; width: 50%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-right: 3px;">
                         <engine:Label text="Description" name="Header" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(51, 47, 47); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(255, 255, 255);" />
-                        <engine:IntegerField label="Use Radius" value="42" />
-                        <engine:Toggle label="Can Pickup" name="CanPickup" />
+                        <engine:IntegerField label="Use Radius" value="0" name="ItemUseRadius" />
+                        <engine:Toggle label="Can Pickup" name="CanPickedup" />
                         <engine:Toggle label="Can Dropped" name="CanDropped" />
                         <engine:Toggle label="Can Carried" name="CanCarried" />
                     </engine:VisualElement>
                     <engine:VisualElement name="Right" style="flex-grow: 1; width: 50%; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; margin-left: 3px;">
                         <engine:Label text="Description" name="Header" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(51, 47, 47); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(255, 255, 255);" />
-                        <engine:IntegerField label="Price" value="42" name="Price" />
+                        <engine:IntegerField label="Price" value="0" name="Price" />
                         <engine:Slider label="SellPercentage" value="42" high-value="1" name="SellPercentage" fill="false" show-input-field="true" />
                     </engine:VisualElement>
                 </engine:VisualElement>
