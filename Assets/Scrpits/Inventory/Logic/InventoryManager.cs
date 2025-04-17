@@ -10,6 +10,10 @@ namespace Farm.Inventory
         [Header("Inventory Data")]
         public InventoryBagSO playerBag;
 
+        private void Start()
+        {
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+        }
 
         /// <summary>
         /// Retrieves the details of an item based on its unique identifier (ID).
@@ -39,6 +43,8 @@ namespace Farm.Inventory
             var indexInBag = GetItemIndexInBag(item.ItemID);
 
             AddItemAtIndex(item.ItemID, indexInBag, 1);
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
 
             //TODO: 优化逻辑
         }

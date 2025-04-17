@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: PlayerBagSO
   m_EditorClassIdentifier: 
   InventoryItemList:
+  - ItemID: 1007
+    ItemAmount: 1
+  - ItemID: 0
+    ItemAmount: 0
+  - ItemID: 0
+    ItemAmount: 0
+  - ItemID: 0
+    ItemAmount: 0
+  - ItemID: 0
+    ItemAmount: 0
+  - ItemID: 0
+    ItemAmount: 0
   - ItemID: 0
     ItemAmount: 0
   - ItemID: 0
