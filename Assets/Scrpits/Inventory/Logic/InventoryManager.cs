@@ -56,11 +56,11 @@ namespace Farm.Inventory
         /// <returns>添加的物品在背包中的id, 如果不存在则返回 -1</returns>
         public int GetItemIndexInBag(int itemID)
         {
-            foreach (var item in playerBag.InventoryItemList)
+            for (int i = 0; i < itemDataListSO.ItemDetailList.Count; i++)
             {
-                if (item.ItemID == itemID)
+                if (itemDataListSO.ItemDetailList[i].ItemID == itemID)
                 {
-                    return item.ItemID;
+                    return i;
                 }
             }
             return -1;
@@ -90,9 +90,10 @@ namespace Farm.Inventory
         /// <param name="amount">需要添加的数量</param>
         public void AddItemAtIndex(int ID, int indexInBag, int amount)
         {
+            Debug.Log($"Input ID in dataso:{ID}");
             if (indexInBag == -1)                           // 背包里没有这个物体
             {
-                if(!CheckBagCapcity())                      // 背包满了
+                if (!CheckBagCapcity())                      // 背包满了
                 {
                     Debug.Log("背包已满");
                     return;
@@ -114,6 +115,8 @@ namespace Farm.Inventory
             }
             else
             {
+                // Debug.Log($"ID:{ID}, Amount:{amount + playerBag.InventoryItemList[indexInBag].ItemAmount}");
+                // Debug.Log($"indexInBag{indexInBag}");
                 var item = new InventoryItem
                 {
                     ItemID = ID,

@@ -56,10 +56,33 @@ namespace Farm.Inventory
             }
         }
 
+        /// <summary>
+        /// 打开或关闭背包UI面板
+        /// </summary>
         public void OpenBagUI()
         {
             _isBagOpening = !_isBagOpening;
             _bagUI.SetActive(_isBagOpening);
+        }
+
+        /// <summary>
+        /// 更新高亮UI显示
+        /// </summary>
+        /// <param name="index"></param>
+        public void UpdateSlotHighlight(int index)
+        {
+            foreach (var slot in PlayerSlots)
+            {
+                if (slot.ItemIndex == index && slot.IsSelected)
+                {
+                    slot.SlotHighlightImage.gameObject.SetActive(true);
+                }
+                else
+                {
+                    slot.IsSelected = false;
+                    slot.SlotHighlightImage.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

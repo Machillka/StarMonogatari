@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 5036010312693902318}
   - component: {fileID: 4833432282086292432}
   - component: {fileID: 1303585414136778800}
+  - component: {fileID: 7931908804955310658}
   m_Layer: 0
   m_Name: Highlight
   m_TagString: Untagged
@@ -211,6 +212,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &7931908804955310658
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3138077041532620258}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d93fde6bf0b39543ae4c2a526ab6269, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7982563528521286489
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slotImage: {fileID: 4517994842193788270}
   _amountText: {fileID: 4598747290905004794}
-  _slotHighlightImage: {fileID: 1303585414136778800}
+  SlotHighlightImage: {fileID: 1303585414136778800}
   _button: {fileID: 700272756644762059}
   SlotType: 0
   IsSelected: 0
@@ -442,3 +465,4 @@ MonoBehaviour:
     ItemPrice: 0
     SellPercentage: 0
   ItemAmount: 0
+  ItemIndex: 0
