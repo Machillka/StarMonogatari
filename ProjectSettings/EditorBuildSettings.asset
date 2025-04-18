@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Presistent Scene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Field 01.unity
+    guid: dcb86f4f7dbbb1143bae0880bb46690a
+  - enabled: 1
+    path: Assets/Scenes/Room Inside 01.unity
+    guid: c32c76e813e78074b947c8c6a870dca1
+  - enabled: 1
+    path: Assets/Scenes/UI.unity
+    guid: be4ad99bd7333604488c5a37b1b740ec
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

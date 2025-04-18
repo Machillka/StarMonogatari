@@ -7,7 +7,6 @@ namespace Farm.Inventory
 {
     public class SlotUiController : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        [Header("Component")]
         [SerializeField] private Image _slotImage;
         [SerializeField] private TextMeshProUGUI _amountText;
         [SerializeField] public Image SlotHighlightImage;
@@ -67,11 +66,15 @@ namespace Farm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log(SlotItem.ItemID);
             if (ItemAmount == 0)
                 return;
             IsSelected = !IsSelected;
             _inventoryUI.UpdateSlotHighlight(SlotIndex);
+
+            if (SlotType == SlotTypes.Bag)
+            {
+                EventHandler.CallItemSelectedEvent(SlotItem, IsSelected);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)

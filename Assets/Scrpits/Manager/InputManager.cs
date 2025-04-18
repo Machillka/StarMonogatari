@@ -9,6 +9,8 @@ public class InputManager : Singleton<InputManager>
 {
     private SystemInputActions _inputController;
     public Vector2 MovementInput{ get; protected set; }
+    public bool IsShiftTimeButtonPressed;
+    public bool IsShiftTimeButtonPressing;
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
 
@@ -45,5 +47,8 @@ public class InputManager : Singleton<InputManager>
         }
 
         MovementInput = new Vector2(_inputX, _inputY);
+
+        IsShiftTimeButtonPressed = _inputController.Player.TimeShift.WasPressedThisFrame();
+        IsShiftTimeButtonPressing = _inputController.Player.TimeShift.IsPressed();
     }
 }

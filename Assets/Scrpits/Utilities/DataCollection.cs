@@ -29,3 +29,11 @@ public struct InventoryItem                 // 结构体默认初始化为0, 所
     public int ItemID;                      // 存储 ID -> 对应在物品数据库中的 ID, 可供查找
     public int ItemAmount;                  // 存储该物体的数量
 }
+
+[System.Serializable]
+public class AnimatorType
+{
+    public PlayerHoldPartTypes holdType;
+    public PlayerBodyParts bodyPart;
+    public AnimatorOverrideController overrideController;
+}

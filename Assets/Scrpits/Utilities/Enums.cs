@@ -14,3 +14,21 @@ public enum InventoryLocation
 {
     Player, Box
 }
+
+public enum PlayerHoldPartTypes
+{
+    None, Carry, Hoe, Break
+}
+
+public enum PlayerBodyParts
+{
+    Body, Hair, Arm, Tool
+}
+
+public enum Seasons
+{
+    Spring,
+    Summer,
+    Fall,
+    Winter
+}
