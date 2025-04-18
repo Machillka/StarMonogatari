@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Farm.Inventory
 {
@@ -11,13 +12,15 @@ namespace Farm.Inventory
         //TODO: 不通过拖拽赋值的方式
         [SerializeField] private SlotUiController[] PlayerSlots;
 
+        public Image DragtItemImage;
+
         private bool _isBagOpening;
 
         private void Start()
         {
             for (int i = 0; i < PlayerSlots.Length; i++)
             {
-                PlayerSlots[i].ItemIndex = i;
+                PlayerSlots[i].SlotIndex = i;
             }
 
             _isBagOpening = _bagUI.activeInHierarchy;
@@ -73,7 +76,7 @@ namespace Farm.Inventory
         {
             foreach (var slot in PlayerSlots)
             {
-                if (slot.ItemIndex == index && slot.IsSelected)
+                if (slot.SlotIndex == index && slot.IsSelected)
                 {
                     slot.SlotHighlightImage.gameObject.SetActive(true);
                 }

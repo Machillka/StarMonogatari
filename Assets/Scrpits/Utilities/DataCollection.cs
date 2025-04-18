@@ -24,8 +24,8 @@ public class ItemDetails
 }
 
 [System.Serializable]
-public struct InventoryItem
+public struct InventoryItem                 // 结构体默认初始化为0, 所以可以作为特判的标准
 {
-    public int ItemID;
-    public int ItemAmount;
+    public int ItemID;                      // 存储 ID -> 对应在物品数据库中的 ID, 可供查找
+    public int ItemAmount;                  // 存储该物体的数量
 }

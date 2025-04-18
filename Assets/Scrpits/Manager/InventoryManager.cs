@@ -41,7 +41,7 @@ namespace Farm.Inventory
             }
 
             var indexInBag = GetItemIndexInBag(item.ItemID);
-
+            Debug.Log($"Index:{indexInBag}");
             AddItemAtIndex(item.ItemID, indexInBag, 1);
 
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
@@ -53,12 +53,13 @@ namespace Farm.Inventory
         /// 判断物体是否在背包中
         /// </summary>
         /// <param name="itemID"></param>
-        /// <returns>添加的物品在背包中的id, 如果不存在则返回 -1</returns>
+        /// <returns>添加的物品在玩家背包中的id, 如果不存在则返回 -1</returns>
         public int GetItemIndexInBag(int itemID)
         {
-            for (int i = 0; i < itemDataListSO.ItemDetailList.Count; i++)
+            Debug.Log($"In Function, itemid = {itemID}");
+            for (int i = 0; i < playerBag.InventoryItemList.Count; i++)
             {
-                if (itemDataListSO.ItemDetailList[i].ItemID == itemID)
+                if (playerBag.InventoryItemList[i].ItemID == itemID)
                 {
                     return i;
                 }
@@ -90,7 +91,6 @@ namespace Farm.Inventory
         /// <param name="amount">需要添加的数量</param>
         public void AddItemAtIndex(int ID, int indexInBag, int amount)
         {
-            Debug.Log($"Input ID in dataso:{ID}");
             if (indexInBag == -1)                           // 背包里没有这个物体
             {
                 if (!CheckBagCapcity())                      // 背包满了
@@ -109,6 +109,7 @@ namespace Farm.Inventory
                     if (playerBag.InventoryItemList[i].ItemID == 0)
                     {
                         playerBag.InventoryItemList[i] = item;
+                        Debug.Log($"i = {i}");
                         break;
                     }
                 }
@@ -126,6 +127,25 @@ namespace Farm.Inventory
                 playerBag.InventoryItemList[indexInBag] = item;
             }
         }
-    }
+
+        public void SwapPlayerBagItem(int fromIndex, int targetIndex)
+        {
+            InventoryItem currentItem = playerBag.InventoryItemList[fromIndex];
+            InventoryItem targetItem = playerBag.InventoryItemList[targetIndex];
+
+            if (targetItem.ItemID != 0)
+            {
+                playerBag.InventoryItemList[fromIndex] = targetItem;
+                playerBag.InventoryItemList[targetIndex] = currentItem;
+            }
+            else
+            {
+                playerBag.InventoryItemList[fromIndex] = new InventoryItem();
+                playerBag.InventoryItemList[targetIndex] = currentItem;
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+        }
+   }
 }
 
