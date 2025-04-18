@@ -179,8 +179,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 50
+    SellPercentage: 0.5
   - ItemID: 1015
     ItemName: "\u84DD\u8393"
     ItemType: 1
@@ -191,8 +191,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 70
+    SellPercentage: 0.6
   - ItemID: 1016
     ItemName: "\u8304\u5B50"
     ItemType: 1
@@ -203,8 +203,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 30
+    SellPercentage: 0.5
   - ItemID: 1017
     ItemName: "\u8461\u8404"
     ItemType: 1
@@ -215,8 +215,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 100
+    SellPercentage: 0.8
   - ItemID: 1018
     ItemName: "\u7EA2\u841D\u535C"
     ItemType: 1
@@ -227,8 +227,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 20
+    SellPercentage: 0.5
   - ItemID: 1019
     ItemName: "\u7EA2\u8FA3\u6912"
     ItemType: 1
@@ -239,8 +239,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 120
+    SellPercentage: 0.9
   - ItemID: 1020
     ItemName: "\u5357\u74DC"
     ItemType: 1
@@ -251,8 +251,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 180
+    SellPercentage: 0.9
   - ItemID: 1021
     ItemName: "\u756A\u8304"
     ItemType: 1
@@ -263,8 +263,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 120
+    SellPercentage: 0.7
   - ItemID: 1022
     ItemName: "\u829C\u83C1"
     ItemType: 1
@@ -275,5 +275,5 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 1
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 10
+    SellPercentage: 0.3

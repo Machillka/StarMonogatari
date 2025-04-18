@@ -8,6 +8,7 @@ namespace Farm.Inventory
 {
     public class InventoryUIController : MonoBehaviour
     {
+        public ItemToolTipContoller ItemToolTip;
         [SerializeField] private GameObject _bagUI;
         //TODO: 不通过拖拽赋值的方式
         [SerializeField] private SlotUiController[] PlayerSlots;

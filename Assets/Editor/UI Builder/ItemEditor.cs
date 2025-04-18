@@ -18,8 +18,8 @@ public class ItemEditor : EditorWindow
     private Sprite defaultIcon;
     private VisualElement iconPreview;
 
-    [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
+    // [SerializeField]
+    // private VisualTreeAsset m_VisualTreeAsset = default;
 
     [MenuItem("MachillkaEditor/ItemEditor")]
     public static void ShowExample()
