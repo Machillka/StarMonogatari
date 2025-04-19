@@ -3,10 +3,20 @@ using Unity.Cinemachine;
 
 public class SwitchBounds : MonoBehaviour
 {
-    //TODO: 根据场景切换修改边界
-    private void Start()
+    //TODO[x]: 根据场景切换修改边界
+    // private void Start()
+    // {
+    //     SwitchConfinerShape();
+    // }
+
+    private void OnEnable()
     {
-        SwitchConfinerShape();
+        EventHandler.AfterSceneLoadedEvent += SwitchConfinerShape;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.AfterSceneLoadedEvent -= SwitchConfinerShape;
     }
 
     private void SwitchConfinerShape()

@@ -4,6 +4,7 @@ namespace Farm.SceneTransition
 {
     public class Teleport : MonoBehaviour
     {
+        [SceneName]
         public string SceneToLoadName;
         public Vector3 TargetPosition;
 

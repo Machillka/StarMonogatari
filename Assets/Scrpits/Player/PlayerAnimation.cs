@@ -27,11 +27,20 @@ public class PlayerAnimation : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelected;
+        EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelected;
+        EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
+    }
+
+    private void OnBeforeSceneLoadedEvent()
+    {
+        _holdItem.enabled = false;
+        SwitchAnimator(PlayerHoldPartTypes.None);
+
     }
 
     private void OnItemSelected(ItemDetails itemInformation, bool isSelected)

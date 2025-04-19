@@ -7,19 +7,26 @@ namespace Farm.Inventory
         public Item ItemPrefab;
         private Transform _itemParentTransform;
 
-        private void Start()
-        {
-            _itemParentTransform = GameObject.FindWithTag("ItemParent").transform;
-        }
+        // private void Start()
+        // {
+        //     _itemParentTransform = GameObject.FindWithTag("ItemParent").transform;
+        // }
 
         private void OnEnable()
         {
             EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+            EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+            EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+        }
+
+        private void OnAfterSceneLoadedEvent()
+        {
+            _itemParentTransform = GameObject.FindWithTag("ItemParent").transform;
         }
 
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)

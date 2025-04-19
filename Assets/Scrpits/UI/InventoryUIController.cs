@@ -30,11 +30,18 @@ namespace Farm.Inventory
         private void OnEnable()
         {
             EventHandler.UpdateInventoryUI += UpdateInventoryUI;
+            EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= UpdateInventoryUI;
+            EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
+        }
+
+        private void OnBeforeSceneLoadedEvent()
+        {
+            UpdateSlotHighlight(-1);
         }
 
         public void UpdateInventoryUI(InventoryLocation location, List<InventoryItem> items)

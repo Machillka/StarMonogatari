@@ -14,6 +14,9 @@ public class InputManager : Singleton<InputManager>
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
 
+    public bool IsDisabledInput;
+
+
     private float _inputX, _inputY;
 
     protected override void Awake()
@@ -26,15 +29,35 @@ public class InputManager : Singleton<InputManager>
     private void OnEnable()
     {
         _inputController.Enable();
+        EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
+        EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         _inputController.Disable();
+        EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
+        EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        IsDisabledInput = false;
+    }
+
+    private void OnBeforeSceneLoadedEvent()
+    {
+        IsDisabledInput = true;
     }
 
     private void Update()
     {
+        if (IsDisabledInput)
+        {
+            MovementInput = Vector2.zero;
+            return;
+        }
+
         MovementInput = _inputController.Player.Move.ReadValue<Vector2>();
 
         _inputX = MovementInput.x;

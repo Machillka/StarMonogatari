@@ -40,4 +40,22 @@ public class EventHandler
     {
         TransitionEvent?.Invoke(sceneToLoadName, targetPosition);
     }
+
+    public static UnityAction BeforeSceneLoadedEvent;
+    public static void CallBeforeSceneLoadedEvent()
+    {
+        BeforeSceneLoadedEvent?.Invoke();
+    }
+
+    public static UnityAction AfterSceneLoadedEvent;
+    public static void CallAfterSceneLoadedEvent()
+    {
+        AfterSceneLoadedEvent?.Invoke();
+    }
+
+    public static UnityAction<Vector3> MoveToPosition;
+    public static void CallMoveToPosition(Vector3 targetPosition)
+    {
+        MoveToPosition?.Invoke(targetPosition);
+    }
 }
