@@ -37,3 +37,35 @@ public class AnimatorType
     public PlayerBodyParts bodyPart;
     public AnimatorOverrideController overrideController;
 }
+
+[System.Serializable]
+public class SerializableVector3
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public SerializableVector3(Vector3 vector)
+    {
+        x = vector.x;
+        y = vector.y;
+        z = vector.z;
+    }
+
+    public Vector3 ToVector3()
+    {
+        return new Vector3(x, y, z);
+    }
+
+    public Vector2Int ToVector2()
+    {
+        return new Vector2Int((int)x, (int)y);
+    }
+}
+
+[System.Serializable]
+public class SceneItem
+{
+    public int ItemID;
+    public SerializableVector3 Position;
+}
