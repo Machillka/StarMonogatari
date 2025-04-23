@@ -18,7 +18,7 @@ public class SwitchBounds : MonoBehaviour
     {
         EventHandler.AfterSceneLoadedEvent -= SwitchConfinerShape;
     }
-
+    [ContextMenu("SwitchConfinerShape")]
     private void SwitchConfinerShape()
     {
         PolygonCollider2D confinerShape = GameObject.FindGameObjectWithTag("BoundConfiner").GetComponent<PolygonCollider2D>();

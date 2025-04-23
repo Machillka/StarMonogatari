@@ -75217,7 +75217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e63f2ebf63d56342b976f394327254f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoadName: Room Inside 01
+  SceneToLoadName: Room Inside Test
   TargetPosition: {x: 6.2, y: -4.5, z: 0}
 --- !u!61 &1931763521
 BoxCollider2D:

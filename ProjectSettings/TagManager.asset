@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BoundConfiner
   - ItemParent
+  - CursorCanvas
   layers:
   - Default
   - TransparentFX

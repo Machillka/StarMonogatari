@@ -51,13 +51,13 @@ namespace Farm.SceneTransition
 
         private IEnumerator TransitionScene(string targetSceneName, Vector3 targetPosition)
         {
-            EventHandler.CallBeforeSceneLoadedEvent();
             yield return Fade(1f); // Fade to black
+            EventHandler.CallBeforeSceneLoadedEvent();
 
             yield return UnloadActiveScene();
 
             yield return LoadSceneSetActive(targetSceneName);
-
+            yield return new WaitForSeconds(1f);
             EventHandler.CallMoveToPosition(targetPosition);
 
             EventHandler.CallAfterSceneLoadedEvent();
