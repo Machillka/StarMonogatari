@@ -28,12 +28,12 @@ namespace Farm.Inventory
         private void OnBeforeSceneLoadedEvent()
         {
             GetAllSceneItems();
-            RecreateAllItems();
         }
 
         private void OnAfterSceneLoadedEvent()
         {
             _itemParentTransform = GameObject.FindWithTag("ItemParent").transform;
+            RecreateAllItems();
         }
 
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)
@@ -51,7 +51,7 @@ namespace Farm.Inventory
 
             foreach (var item in FindObjectsByType<Item>(FindObjectsSortMode.None))
             {
-                SceneItem sceneItem = new SceneItem
+                SceneItem sceneItem = new()
                 {
                     ItemID = item.ItemID,
                     Position = new SerializableVector3(item.transform.position)
@@ -83,7 +83,7 @@ namespace Farm.Inventory
             {
                 if (currentSceneItems != null)
                 {
-                    foreach (var item in FindObjectsByType<Item>(FindObjectsSortMode.None))
+                    foreach (var item in FindObjectsByType<Item>(FindObjectsSortMode.InstanceID))
                     {
                         item.transform.SetParent(null); // 解除父子关系，避免引用问题
                         Destroy(item.gameObject); // 确保物体被销毁

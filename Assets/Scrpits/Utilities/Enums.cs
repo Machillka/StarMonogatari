@@ -1,7 +1,7 @@
 public enum ItemType
 {
     Seed, Commodity, Furniture,
-    HoeTool, ChopTool, BreakTool, ReapTool, PickaxeTool, WaterTool, CollectTool,
+    HoeTool, ChopTool, BreakTool, ReapTool, PickaxeTool, WaterTool, CollectTool, Tool,
     ReapableScenery
 }
 

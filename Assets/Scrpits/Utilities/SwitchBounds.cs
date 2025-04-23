@@ -25,6 +25,9 @@ public class SwitchBounds : MonoBehaviour
 
         CinemachineConfiner2D confiner = GetComponent<CinemachineConfiner2D>();
 
-        confiner.BoundingShape2D = confinerShape;
+        confiner.BoundingShape2D = confinerShape;//BUG 镜头不随场景切换更新
+        // gameObject.SetActive(false);
+        confiner.InvalidateBoundingShapeCache();
+        // gameObject.SetActive(true);
     }
 }

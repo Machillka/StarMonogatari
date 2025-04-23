@@ -52,15 +52,17 @@ namespace Farm.SceneTransition
         private IEnumerator TransitionScene(string targetSceneName, Vector3 targetPosition)
         {
             EventHandler.CallBeforeSceneLoadedEvent();
-            // yield return Fade(1f); // Fade to black
+            yield return Fade(1f); // Fade to black
 
             yield return UnloadActiveScene();
 
             yield return LoadSceneSetActive(targetSceneName);
 
             EventHandler.CallMoveToPosition(targetPosition);
+
             EventHandler.CallAfterSceneLoadedEvent();
-            // yield return Fade(0f); // Fade to clear
+
+            yield return Fade(0f); // Fade to clear
 
         }
         //TODO: 考虑加载和动画时间的结合，如果加载时间小于动画时间，则动画时间持续到预设为止；如果加载时间非常长，就一直显示动画
