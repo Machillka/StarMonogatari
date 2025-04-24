@@ -32,3 +32,11 @@ public enum Seasons
     Fall,
     Winter
 }
+
+public enum GridTypes
+{
+    Diggable,
+    DropItem,
+    PlaceFurniture,
+    NPCObstacle
+}

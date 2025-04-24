@@ -15,17 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Room Inside 01.unity
     guid: c32c76e813e78074b947c8c6a870dca1
   - enabled: 1
-    path: Assets/Scenes/Room Inside Test.unity
-    guid: bd4b7d13bb3c5084495bc6a2b65054a0
-  - enabled: 1
     path: Assets/Scenes/UI.unity
     guid: be4ad99bd7333604488c5a37b1b740ec
-  - enabled: 1
-    path: Assets/Scenes/Template Field.unity
-    guid: 63cb5d948effda64e8430cb2f554e5ca
-  - enabled: 1
-    path: Assets/Scenes/Test Scene.unity
-    guid: 209c4964f0cc4b04e91bb3ff06e3b6b5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

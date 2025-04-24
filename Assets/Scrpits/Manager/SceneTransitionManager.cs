@@ -29,10 +29,11 @@ namespace Farm.SceneTransition
                 StartCoroutine(TransitionScene(sceneToLoadName, targetPosition));
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            StartCoroutine(LoadSceneSetActive(startSceneName));
             _fadeCanvasGroup = FindAnyObjectByType<CanvasGroup>();
+            yield return LoadSceneSetActive(startSceneName);
+            EventHandler.CallAfterSceneLoadedEvent();
         }
 
         private IEnumerator LoadSceneSetActive(string sceneName)
