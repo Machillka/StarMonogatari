@@ -83,7 +83,7 @@ public class TileDetails
 {
     public int GridX, GridY;
     public bool CanDig;
-    public bool CanDropItem;
+    public bool CanDropItem;//TODO: 取反一下，选取不能仍东西的逻辑可能空间消耗会更少
     public bool CanPlaceFurniture;
     public bool IsNPCObstacle;
 

@@ -7,6 +7,8 @@ TagManager:
   - BoundConfiner
   - ItemParent
   - CursorCanvas
+  - Water
+  - Dig
   layers:
   - Default
   - TransparentFX

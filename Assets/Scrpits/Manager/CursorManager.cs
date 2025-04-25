@@ -98,9 +98,12 @@ public class CursorManager : MonoBehaviour
         }
 
         _currentItem = itemInformation;
+        //WORKFLOW : 根据物品类型来设置鼠标样式
         _currentSprite = itemInformation.ItemType switch
         {
             ItemType.ChopTool => Tool,
+            ItemType.HoeTool => Tool,
+            ItemType.WaterTool => Tool,
             ItemType.Seed => Seed,
             ItemType.Commodity => Item,
             _ => Normal
@@ -138,17 +141,26 @@ public class CursorManager : MonoBehaviour
 
         if (currentTile != null)
         {
+            //WORKFLOW 补齐所有物品判断
             switch (_currentItem.ItemType)
             {
                 case ItemType.Commodity:
                     if (currentTile.CanDropItem && _currentItem.CanDropped)
-                    {
                         SetCursorValid();
-                    }
                     else
-                    {
                         SetCursorInValid();
-                    }
+                    break;
+                case ItemType.HoeTool:
+                    if (currentTile.CanDig)
+                        SetCursorValid();
+                    else
+                        SetCursorInValid();
+                    break;
+                case ItemType.WaterTool:
+                    if (currentTile.daySinceDug > -1 && currentTile.daySinceWatered == -1)
+                        SetCursorValid();
+                    else
+                        SetCursorInValid();
                     break;
             }
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,9 @@ namespace Farm.Inventory
     public class ItemManager : MonoBehaviour
     {
         public Item ItemPrefab;
+        public Item BounceItemPrefab;
         private Transform _itemParentTransform;
+        private Transform _playerTransform => FindAnyObjectByType<PlayerMovement>().transform;
 
         private Dictionary<string, List<SceneItem>> _sceneItemDictionary = new Dictionary<string, List<SceneItem>>();
 
@@ -44,11 +47,14 @@ namespace Farm.Inventory
             item.ItemID = itemID;
         }
 
-        private void OnDropItemInScene(int itemID, Vector3 pos)
+        private void OnDropItemInScene(int itemID, Vector3 mousePosition)
         {
-            // TODO: 处理实际效果
-            var item = Instantiate(ItemPrefab, pos, Quaternion.identity, _itemParentTransform);
+            // TODO[x]: 处理实际效果
+            var item = Instantiate(BounceItemPrefab, _playerTransform.position, Quaternion.identity, _itemParentTransform);
             item.ItemID = itemID;
+
+            var dir = (mousePosition - _playerTransform.position).normalized;
+            item.GetComponent<ItemDropBounce>().InitBounceItem(mousePosition, dir);
         }
 
         /// <summary>

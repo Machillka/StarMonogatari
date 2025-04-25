@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -13,6 +14,10 @@ public class PlayerAnimation : MonoBehaviour
     public List<AnimatorType> animatorTypes;
 
     private Dictionary<string, Animator> _animatorDict = new Dictionary<string, Animator>();
+
+    [Header("工具动画相关")]
+    private float _mouseX, _mouseY;
+    private bool _isUseTool;
 
     private void Awake()
     {
@@ -38,12 +43,36 @@ public class PlayerAnimation : MonoBehaviour
         EventHandler.MouseClickEvent -= OnMouseClickEvent;
     }
 
-    private void OnMouseClickEvent(Vector3 position, ItemDetails itemInformation)
+    private void OnMouseClickEvent(Vector3 mouseWorldPosition, ItemDetails itemInformation)
     {
-        // TODO: 执行对应动画
+        if (_isUseTool)
+        {
+            return;
+        }
+        // TODO[x]:执行对应动画
+        if (itemInformation.ItemType != ItemType.Seed
+            && itemInformation.ItemType != ItemType.Commodity
+            && itemInformation.ItemType != ItemType.Furniture)
+        {
+            _mouseX = mouseWorldPosition.x - transform.position.x;
+            _mouseY = mouseWorldPosition.y - transform.position.y;
 
-        // 执行动画后的逻辑
-        EventHandler.CallExcuteActionAfterAnimation(position, itemInformation);
+            if (Mathf.Abs(_mouseX) > Mathf.Abs(_mouseY))
+            {
+                _mouseY = 0f;
+            }
+            else
+            {
+                _mouseX = 0f;
+            }
+
+            StartCoroutine(UseToolRoutine(mouseWorldPosition, itemInformation));
+        }
+
+        else
+        {
+            EventHandler.CallExcuteActionAfterAnimation(mouseWorldPosition, itemInformation);
+        }
     }
 
     private void OnBeforeSceneLoadedEvent()
@@ -53,12 +82,35 @@ public class PlayerAnimation : MonoBehaviour
 
     }
 
+    private IEnumerator UseToolRoutine(Vector3 mouseWorldPosition, ItemDetails itemInformation)
+    {
+        _isUseTool = true;
+        InputManager.Instance.IsDisabledInput = true;
+        yield return null;
+
+        foreach (var anim in _animators)
+        {
+            anim.SetTrigger("UseTool");
+            anim.SetFloat("InputX", _mouseX);
+            anim.SetFloat("InputY", _mouseY);
+        }
+
+        yield return new WaitForSeconds(0.45f);
+        EventHandler.CallExcuteActionAfterAnimation(mouseWorldPosition, itemInformation);
+        yield return new WaitForSeconds(0.25f);
+
+        _isUseTool = false;
+        InputManager.Instance.IsDisabledInput = false;
+    }
+
     private void OnItemSelected(ItemDetails itemInformation, bool isSelected)
     {
+        //WORKFLOW 设置所不同工具返回不同的动画
         PlayerHoldPartTypes currentType = itemInformation.ItemType switch
         {
             ItemType.Seed => PlayerHoldPartTypes.Carry,
             ItemType.Commodity => PlayerHoldPartTypes.Carry,
+            ItemType.HoeTool => PlayerHoldPartTypes.Hoe,
             _ => PlayerHoldPartTypes.None
         };
         if (isSelected == false)
@@ -88,6 +140,8 @@ public class PlayerAnimation : MonoBehaviour
         foreach (var anim in _animators)
         {
             anim.SetBool("IsMoving", _isMoving);
+            anim.SetFloat("MouseX", _mouseX);
+            anim.SetFloat("MouseY", _mouseY);
             if (_isMoving)
             {
                 anim.SetFloat("InputX", InputManager.Instance.MovementInput.x);

@@ -14,7 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName: Field 01
   TileProperties:
+  - TileCoordinate: {x: -5, y: -14}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: -5, y: -13}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -12}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -14}
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: -4, y: -13}
@@ -23,16 +41,49 @@ MonoBehaviour:
   - TileCoordinate: {x: -4, y: -12}
     TileType: 0
     BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -14}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -13}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: -3, y: -12}
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: -3, y: -11}
     TileType: 0
     BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -14}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -13}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: -2, y: -12}
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: -2, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -9}
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: -1, y: -14}
@@ -47,6 +98,12 @@ MonoBehaviour:
   - TileCoordinate: {x: -1, y: -11}
     TileType: 0
     BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: 0, y: -14}
     TileType: 0
     BoolTypeValue: 1
@@ -57,6 +114,12 @@ MonoBehaviour:
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: 0, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -9}
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: 1, y: -14}
@@ -71,6 +134,12 @@ MonoBehaviour:
   - TileCoordinate: {x: 1, y: -11}
     TileType: 0
     BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: 2, y: -14}
     TileType: 0
     BoolTypeValue: 1
@@ -83,6 +152,12 @@ MonoBehaviour:
   - TileCoordinate: {x: 2, y: -11}
     TileType: 0
     BoolTypeValue: 1
+  - TileCoordinate: {x: 2, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 2, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
   - TileCoordinate: {x: 3, y: -14}
     TileType: 0
     BoolTypeValue: 1
@@ -93,5 +168,29 @@ MonoBehaviour:
     TileType: 0
     BoolTypeValue: 1
   - TileCoordinate: {x: 3, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 3, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 3, y: -9}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -14}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -13}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -12}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -11}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -10}
+    TileType: 0
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -9}
     TileType: 0
     BoolTypeValue: 1

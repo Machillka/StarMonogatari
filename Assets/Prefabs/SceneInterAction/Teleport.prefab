@@ -91,5 +91,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e63f2ebf63d56342b976f394327254f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoadName: 
+  SceneToLoadName: Presistent Scene
   TargetPosition: {x: 0, y: 0, z: 0}
