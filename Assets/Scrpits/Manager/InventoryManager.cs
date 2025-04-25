@@ -18,14 +18,21 @@ namespace Farm.Inventory
         private void OnEnable()
         {
             EventHandler.DropItemInScene += OnDropItemInScene;
+            EventHandler.HarvestAtPlaterPositionEvent += OnHarvestAtPlaterPositionEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.DropItemInScene -= OnDropItemInScene;
+            EventHandler.HarvestAtPlaterPositionEvent -= OnHarvestAtPlaterPositionEvent;
         }
 
-        private void OnDropItemInScene(int itemID, Vector3 pos)
+        private void OnHarvestAtPlaterPositionEvent(int itemID)
+        {
+            AddItem(itemID);
+        }
+
+        private void OnDropItemInScene(int itemID, Vector3 pos, ItemType itemType)
         {
             RemoveItem(itemID, 1);
         }
@@ -62,6 +69,16 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
 
             //TODO: 优化逻辑
+        }
+
+         public void AddItem(int itemID)
+        {
+            var indexInBag = GetItemIndexInBag(itemID);
+            // Debug.Log($"Index:{indexInBag}");
+            AddItemAtIndex(itemID, indexInBag, 1);
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+
         }
 
         /// <summary>

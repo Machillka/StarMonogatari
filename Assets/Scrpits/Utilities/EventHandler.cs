@@ -17,10 +17,10 @@ public class EventHandler
         InstantiateItemInScene?.Invoke(itemID, pos);
     }
 
-    public static event Action<int, Vector3> DropItemInScene;
-    public static void CallDropItemInScene(int itemID, Vector3 pos)
+    public static event Action<int, Vector3, ItemType> DropItemInScene;
+    public static void CallDropItemInScene(int itemID, Vector3 pos, ItemType itemType)
     {
-        DropItemInScene?.Invoke(itemID, pos);
+        DropItemInScene?.Invoke(itemID, pos, itemType);
     }
 
     public static UnityAction<ItemDetails, bool> ItemSelectedEvent;
@@ -39,7 +39,7 @@ public class EventHandler
     public static void CallGameDayChangeEvent(int day, Seasons season)
     {
         GameDayEvent?.Invoke(day, season);
-        Debug.Log("day change");
+        // Debug.Log("day change");
     }
 
     public static event Action<int, int, int, int, Seasons> GameDateEvent;//TODO: 观察者模式，对于每一个时间单位都写一个事件
@@ -88,5 +88,11 @@ public class EventHandler
     public static void CallPlantSeedEvent(int seedID, TileDetails tile)
     {
         PlantSeedEvent?.Invoke(seedID, tile);
+    }
+
+    public static UnityAction<int> HarvestAtPlaterPositionEvent;
+    public static void CallHarvestAtPlaterPositionEvent(int itemID)
+    {
+        HarvestAtPlaterPositionEvent?.Invoke(itemID);
     }
 }

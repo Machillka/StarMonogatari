@@ -23,14 +23,6 @@ namespace Farm.Inventory
             }
         }
 
-        // private void Start()
-        // {
-        //     if (ItemID != 0)
-        //     {
-        //         Init(ItemID);
-        //     }
-        // }
-
         public void Init(int ID)
         {
             ItemID = ID;

@@ -47,10 +47,14 @@ namespace Farm.Inventory
             item.ItemID = itemID;
         }
 
-        private void OnDropItemInScene(int itemID, Vector3 mousePosition)
+        //TODO: 设置两个事件，一个是remove from bag; 另一个是 drop
+        private void OnDropItemInScene(int itemID, Vector3 mousePosition, ItemType itemType)
         {
+            if (itemType == ItemType.Seed)
+                return;     // 是种子就不生成新物体
+
             // TODO[x]: 处理实际效果
-            var item = Instantiate(BounceItemPrefab, _playerTransform.position, Quaternion.identity, _itemParentTransform);
+                var item = Instantiate(BounceItemPrefab, _playerTransform.position, Quaternion.identity, _itemParentTransform);
             item.ItemID = itemID;
 
             var dir = (mousePosition - _playerTransform.position).normalized;

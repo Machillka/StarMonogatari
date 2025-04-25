@@ -70,6 +70,7 @@ namespace Farm.Inventory
         {
             if (ItemAmount == 0)
                 return;
+
             IsSelected = !IsSelected;
             _inventoryUI.UpdateSlotHighlight(SlotIndex);
 

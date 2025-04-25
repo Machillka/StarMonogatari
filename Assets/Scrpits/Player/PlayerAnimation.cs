@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using Farm.Inventory;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class PlayerAnimation : MonoBehaviour
         EventHandler.ItemSelectedEvent += OnItemSelected;
         EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
         EventHandler.MouseClickEvent += OnMouseClickEvent;
+        EventHandler.HarvestAtPlaterPositionEvent += OnHarvestAtPlaterPositionEvent;
     }
 
     private void OnDisable()
@@ -41,6 +43,16 @@ public class PlayerAnimation : MonoBehaviour
         EventHandler.ItemSelectedEvent += OnItemSelected;
         EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
         EventHandler.MouseClickEvent -= OnMouseClickEvent;
+        EventHandler.HarvestAtPlaterPositionEvent -= OnHarvestAtPlaterPositionEvent;
+    }
+
+    private void OnHarvestAtPlaterPositionEvent(int itemID)
+    {
+        Sprite itemSprite = InventoryManager.Instance.GetItemDetails(itemID).ItemOnWorldSprite;
+        if (_holdItem.enabled == false)
+        {
+            StartCoroutine(ShowItem(itemSprite));
+        }
     }
 
     private void OnMouseClickEvent(Vector3 mouseWorldPosition, ItemDetails itemInformation)
@@ -68,7 +80,6 @@ public class PlayerAnimation : MonoBehaviour
 
             StartCoroutine(UseToolRoutine(mouseWorldPosition, itemInformation));
         }
-
         else
         {
             EventHandler.CallExcuteActionAfterAnimation(mouseWorldPosition, itemInformation);
@@ -82,8 +93,17 @@ public class PlayerAnimation : MonoBehaviour
 
     }
 
+    private IEnumerator ShowItem(Sprite itemSprite)
+    {
+        _holdItem.sprite = itemSprite;
+        _holdItem.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        _holdItem.enabled = false;
+    }
+
     private IEnumerator UseToolRoutine(Vector3 mouseWorldPosition, ItemDetails itemInformation)
     {
+        // FIXME: 动作和取消输入之间有延迟
         _isUseTool = true;
         InputManager.Instance.IsDisabledInput = true;
         yield return null;
@@ -96,7 +116,7 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         // 播放动画
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.35f);
         // 执行效果
         EventHandler.CallExcuteActionAfterAnimation(mouseWorldPosition, itemInformation);
         // 等待效果执行
@@ -115,6 +135,8 @@ public class PlayerAnimation : MonoBehaviour
             ItemType.Seed => PlayerHoldPartTypes.Carry,
             ItemType.Commodity => PlayerHoldPartTypes.Carry,
             ItemType.HoeTool => PlayerHoldPartTypes.Hoe,
+            ItemType.CollectTool => PlayerHoldPartTypes.Collect,
+            ItemType.WaterTool => PlayerHoldPartTypes.Water,
             _ => PlayerHoldPartTypes.None
         };
         if (isSelected == false)
@@ -128,6 +150,10 @@ public class PlayerAnimation : MonoBehaviour
             {
                 _holdItem.sprite = itemInformation.ItemOnWorldSprite;
                 _holdItem.enabled = true;
+            }
+            else
+            {
+                _holdItem.enabled = false;
             }
         }
         SwitchAnimator(currentType);

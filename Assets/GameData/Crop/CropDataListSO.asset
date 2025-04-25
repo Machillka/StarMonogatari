@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CropDataList:
   - SeedItemID: 1005
-    GrowthDays: 0100000002000000020000000300000003000000
+    GrowthDays: 0100000001000000010000000100000001000000
     GrowthStagePrefab:
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
     GrowthStageSprites:
     - {fileID: -2058122700, guid: bd1655396b777431e85369611fc36aed, type: 3}
     - {fileID: 1098745238, guid: bd1655396b777431e85369611fc36aed, type: 3}
@@ -43,11 +43,11 @@ MonoBehaviour:
   - SeedItemID: 1006
     GrowthDays: 0100000002000000020000000300000003000000
     GrowthStagePrefab:
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
-    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
+    - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
     GrowthStageSprites:
     - {fileID: -1270250029, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
     - {fileID: 1885931999, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}

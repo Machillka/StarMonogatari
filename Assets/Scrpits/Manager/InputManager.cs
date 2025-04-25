@@ -9,14 +9,13 @@ public class InputManager : Singleton<InputManager>
 {
     private SystemInputActions _inputController;
     public Vector2 MovementInput{ get; protected set; }
-    public bool IsShiftTimeButtonPressed;
-    public bool IsShiftTimeButtonPressing;
-    public bool IsLeftMouseButtonPressed => _inputController.Player.DropItem.WasPressedThisFrame();
+    public bool IsShiftTimeButtonPressed => _inputController.Player.TimeShift.WasPressedThisFrame();
+    public bool IsShiftTimeButtonPressing => _inputController.Player.TimeShift.IsPressed();
+    public bool IsLeftMouseButtonPressed;
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
 
     public bool IsDisabledInput;
-
 
     private float _inputX, _inputY;
 
@@ -71,8 +70,6 @@ public class InputManager : Singleton<InputManager>
         }
 
         MovementInput = new Vector2(_inputX, _inputY);
-
-        IsShiftTimeButtonPressed = _inputController.Player.TimeShift.WasPressedThisFrame();
-        IsShiftTimeButtonPressing = _inputController.Player.TimeShift.IsPressed();
+        IsLeftMouseButtonPressed = _inputController.Player.DropItem.WasPressedThisFrame();
     }
 }

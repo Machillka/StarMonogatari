@@ -223,7 +223,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -588,6 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 874345650}
+  - component: {fileID: 874345651}
   m_Layer: 0
   m_Name: Crop Manager
   m_TagString: Untagged
@@ -610,6 +611,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &874345651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874345649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a704d1199460de742865d8611c4031c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CropDataBase: {fileID: 11400000, guid: 847629015b4df734eb0f1268ed4a8459, type: 2}
 --- !u!1 &981914048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,8 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00669d63aad9abb4795ffdd227c66453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsShiftTimeButtonPressed: 0
-  IsShiftTimeButtonPressing: 0
+  IsLeftMouseButtonPressed: 0
   IsDisabledInput: 0
 --- !u!1 &1236468092
 GameObject:
@@ -1418,12 +1431,30 @@ MonoBehaviour:
   - holdType: 1
     bodyPart: 2
     overrideController: {fileID: 22100000, guid: 1ca6afc033f10b748860edaf932400ee, type: 2}
+  - holdType: 4
+    bodyPart: 2
+    overrideController: {fileID: 22100000, guid: cc4e240dc51b95441aabdfeabba67758, type: 2}
   - holdType: 0
     bodyPart: 3
     overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
   - holdType: 2
     bodyPart: 3
     overrideController: {fileID: 22100000, guid: 8d96ee4716c8d95408df4283d32f1fd1, type: 2}
+  - holdType: 4
+    bodyPart: 0
+    overrideController: {fileID: 22100000, guid: 8f94d2ee110785147a4577ab765ea8f7, type: 2}
+  - holdType: 4
+    bodyPart: 1
+    overrideController: {fileID: 22100000, guid: fcdb8953a68f84043bcf9c75777bc3af, type: 2}
+  - holdType: 5
+    bodyPart: 1
+    overrideController: {fileID: 22100000, guid: b21a045c4ced32f4abca030980fa2a4b, type: 2}
+  - holdType: 5
+    bodyPart: 0
+    overrideController: {fileID: 22100000, guid: ec1ea2ba8202d534f9fcda3b1ce71135, type: 2}
+  - holdType: 5
+    bodyPart: 2
+    overrideController: {fileID: 22100000, guid: 7fa8a66872d03b14fa039137ece3de38, type: 2}
 --- !u!1 &1437397874
 GameObject:
   m_ObjectHideFlags: 0

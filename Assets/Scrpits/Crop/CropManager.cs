@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Farm.Crop
+namespace Farm.CropPlant
 {
-    public class CropManager : MonoBehaviour
+    public class CropManager : Singleton<CropManager>
     {
         public CropDataListSO CropDataBase;
         private Transform _cropParent;
@@ -53,7 +53,7 @@ namespace Farm.Crop
             // 空格子
             if (tileInformation.seedItemID == -1)
             {
-                Debug.Log("Space to Plant");
+                // Debug.Log("Space to Plant");
                 tileInformation.seedItemID = itemID;
                 tileInformation.growthDays = 0;
             }
@@ -67,7 +67,7 @@ namespace Farm.Crop
         /// </summary>
         /// <param name="itemID"></param>
         /// <returns></returns>
-        private CropDetails GetCropDetails(int itemID)
+        public CropDetails GetCropDetails(int itemID)
         {
             return CropDataBase.CropDataList.Find(crop => crop.SeedItemID == itemID);
         }
@@ -108,6 +108,7 @@ namespace Farm.Crop
             GameObject crop = Instantiate(cropPrefab, cropPosition, Quaternion.identity, _cropParent);
             //TODO: 使用事件实现
             crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
+            crop.GetComponent<Crop>().CropDetail = cropInformation;
         }
     }
 }

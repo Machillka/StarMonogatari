@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using Farm.CropPlant;
 
 namespace Farm.Map
 {
@@ -139,10 +140,11 @@ namespace Farm.Map
                 {
                     case ItemType.Seed:
                         EventHandler.CallPlantSeedEvent(item.ItemID, currentTile);
+                        EventHandler.CallDropItemInScene(item.ItemID, mousePosition, item.ItemType);
                         break;
 
                     case ItemType.Commodity:
-                        EventHandler.CallDropItemInScene(item.ItemID, mousePosition);
+                        EventHandler.CallDropItemInScene(item.ItemID, mousePosition, item.ItemType);
                         break;
                     case ItemType.HoeTool://NOTE 是返回拷贝还是引用
                         SetDigGround(currentTile);
@@ -154,10 +156,39 @@ namespace Farm.Map
                         SetWaterGround(currentTile);
                         currentTile.daySinceWatered = 0;
                         break;
+                    case ItemType.CollectTool:
+                        Crop currentCrop = GetCropObject(mousePosition);
+                        if (currentCrop != null)
+                        {
+                            currentCrop.ProcessToolAction(item);
+                        }
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
             }
+        }
+
+        /// <summary>
+        /// 检测是否有农作物被点击
+        /// </summary>
+        /// <param name="mouseWorldPosition"></param>
+        /// <returns></returns>
+        private Crop GetCropObject(Vector3 mouseWorldPosition)
+        {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
+            Crop currentCrop = null;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].GetComponent<Crop>())
+                {
+                    currentCrop = colliders[i].GetComponent<Crop>();
+                    break;
+                }
+            }
+
+            return currentCrop;
         }
 
         private void OnGameDayEvent(int day, Seasons season)
@@ -178,9 +209,16 @@ namespace Farm.Map
                 {
                     itemDetailsDict[key].daySinceDug = -1;
                     itemDetailsDict[key].CanDig = true;
+                    itemDetailsDict[key].growthDays = -1;
+                }
+
+                if (itemDetailsDict[key].seedItemID != -1)
+                {
+                    itemDetailsDict[key].growthDays++;
                 }
             }
-                RefreshMap();
+
+            RefreshMap();
         }
 
         /// <summary>
@@ -243,6 +281,10 @@ namespace Farm.Map
                     {
                         SetWaterGround(tileDetail);
                     }
+                    if (tileDetail.seedItemID != -1)
+                    {
+                        EventHandler.CallPlantSeedEvent(tileDetail.seedItemID, tileDetail);
+                    }
                 }
             }
         }
@@ -256,6 +298,11 @@ namespace Farm.Map
             if (_waterTileMap != null)
             {
                 _waterTileMap.ClearAllTiles();
+            }
+
+            foreach (var crop in FindObjectsByType<Crop>(FindObjectsSortMode.None))
+            {
+                Destroy(crop);
             }
 
             DisplayMap(SceneManager.GetActiveScene().name);

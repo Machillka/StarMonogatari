@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Farm.Map;
+using Farm.CropPlant;
 
 public class CursorManager : MonoBehaviour
 {
@@ -104,6 +105,7 @@ public class CursorManager : MonoBehaviour
             ItemType.ChopTool => Tool,
             ItemType.HoeTool => Tool,
             ItemType.WaterTool => Tool,
+            ItemType.CollectTool => Tool,
             ItemType.Seed => Seed,
             ItemType.Commodity => Item,
             _ => Normal
@@ -141,6 +143,7 @@ public class CursorManager : MonoBehaviour
 
         if (currentTile != null)
         {
+            CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
             //WORKFLOW 补齐所有物品判断
             switch (_currentItem.ItemType)
             {
@@ -164,6 +167,12 @@ public class CursorManager : MonoBehaviour
                     break;
                 case ItemType.WaterTool:
                     if (currentTile.daySinceDug > -1 && currentTile.daySinceWatered == -1)
+                        SetCursorValid();
+                    else
+                        SetCursorInValid();
+                    break;
+                case ItemType.CollectTool:
+                    if (currentCrop != null && currentTile.growthDays >= currentCrop.TotalGrouthDays && currentCrop.CheckToolAvaliable(_currentItem.ItemID))
                         SetCursorValid();
                     else
                         SetCursorInValid();
