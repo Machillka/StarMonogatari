@@ -51,6 +51,7 @@ public class PlayerAnimation : MonoBehaviour
         Sprite itemSprite = InventoryManager.Instance.GetItemDetails(itemID).ItemOnWorldSprite;
         if (_holdItem.enabled == false)
         {
+            Debug.Log("start show Item");
             StartCoroutine(ShowItem(itemSprite));
         }
     }
@@ -97,7 +98,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         _holdItem.sprite = itemSprite;
         _holdItem.enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
         _holdItem.enabled = false;
     }
 

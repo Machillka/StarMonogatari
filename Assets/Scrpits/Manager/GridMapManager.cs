@@ -302,7 +302,8 @@ namespace Farm.Map
 
             foreach (var crop in FindObjectsByType<Crop>(FindObjectsSortMode.None))
             {
-                Destroy(crop);
+                Debug.Log($"Destroying {crop}");
+                Destroy(crop.gameObject);
             }
 
             DisplayMap(SceneManager.GetActiveScene().name);

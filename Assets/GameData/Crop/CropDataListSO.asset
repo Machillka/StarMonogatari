@@ -32,8 +32,8 @@ MonoBehaviour:
     RequireActionCount: 01000000
     transferItemID: -1
     ProducedItemID: f6030000
-    ProduceMinAmount: 00000000
-    ProduceMaxAmount: 000000000000000000000000
+    ProduceMinAmount: 03000000
+    ProduceMaxAmount: 05000000
     SpawnRadius: {x: 0, y: 0}
     DaysToRegrow: 0
     RegrowTimes: 0

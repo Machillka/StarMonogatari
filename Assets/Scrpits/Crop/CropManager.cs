@@ -77,11 +77,8 @@ namespace Farm.CropPlant
             for (int i = 0; i < crop.Seasons.Length; i++)
             {
                 if (crop.Seasons[i] == _currentSeason)
-                {
                     return true;
-                }
             }
-
             return false;
         }
 

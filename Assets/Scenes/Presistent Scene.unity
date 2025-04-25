@@ -640,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &981914049
 Transform:
   m_ObjectHideFlags: 0
@@ -1455,6 +1455,18 @@ MonoBehaviour:
   - holdType: 5
     bodyPart: 2
     overrideController: {fileID: 22100000, guid: 7fa8a66872d03b14fa039137ece3de38, type: 2}
+  - holdType: 1
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
+  - holdType: 1
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
+  - holdType: 1
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
+  - holdType: 1
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
 --- !u!1 &1437397874
 GameObject:
   m_ObjectHideFlags: 0
