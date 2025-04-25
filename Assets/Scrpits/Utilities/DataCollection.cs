@@ -94,4 +94,6 @@ public class TileDetails
     public int growthDays = -1;
 
     public int daySinceLastHarvest = -1;
+
+    public GridTypes Itemtype;
 }

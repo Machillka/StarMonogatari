@@ -15,6 +15,21 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
         }
 
+        private void OnEnable()
+        {
+            EventHandler.DropItemInScene += OnDropItemInScene;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.DropItemInScene -= OnDropItemInScene;
+        }
+
+        private void OnDropItemInScene(int itemID, Vector3 pos)
+        {
+            RemoveItem(itemID, 1);
+        }
+
         /// <summary>
         /// Retrieves the details of an item based on its unique identifier (ID).
         /// </summary>
@@ -41,7 +56,7 @@ namespace Farm.Inventory
             }
 
             var indexInBag = GetItemIndexInBag(item.ItemID);
-            Debug.Log($"Index:{indexInBag}");
+            // Debug.Log($"Index:{indexInBag}");
             AddItemAtIndex(item.ItemID, indexInBag, 1);
 
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
@@ -56,7 +71,7 @@ namespace Farm.Inventory
         /// <returns>添加的物品在玩家背包中的id, 如果不存在则返回 -1</returns>
         public int GetItemIndexInBag(int itemID)
         {
-            Debug.Log($"In Function, itemid = {itemID}");
+            // Debug.Log($"In Function, itemid = {itemID}");
             for (int i = 0; i < playerBag.InventoryItemList.Count; i++)
             {
                 if (playerBag.InventoryItemList[i].ItemID == itemID)
@@ -109,7 +124,7 @@ namespace Farm.Inventory
                     if (playerBag.InventoryItemList[i].ItemID == 0)
                     {
                         playerBag.InventoryItemList[i] = item;
-                        Debug.Log($"i = {i}");
+                        // Debug.Log($"i = {i}");
                         break;
                     }
                 }
@@ -146,6 +161,35 @@ namespace Farm.Inventory
 
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
         }
-   }
-}
 
+        /// <summary>
+        /// 移出指定数量的玩家背包内的物品
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <param name="removeAmount"></param>
+        public void RemoveItem(int itemID, int removeAmount)
+        {
+            var indexInGag = GetItemIndexInBag(itemID);
+
+            if (playerBag.InventoryItemList[indexInGag].ItemAmount > removeAmount)
+            {
+                var amount = playerBag.InventoryItemList[indexInGag].ItemAmount - removeAmount;
+                var item = new InventoryItem
+                {
+                    ItemID = itemID,
+                    ItemAmount = amount
+                };
+                playerBag.InventoryItemList[indexInGag] = item;
+            }
+            else if (playerBag.InventoryItemList[indexInGag].ItemAmount == removeAmount)
+            {
+                playerBag.InventoryItemList[indexInGag] = new InventoryItem();
+            }
+            else
+            {
+                // TODO: 商品数量不够逻辑
+            }
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+        }
+    }
+}

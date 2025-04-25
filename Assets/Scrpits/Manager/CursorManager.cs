@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Farm.Map;
 
 public class CursorManager : MonoBehaviour
 {
@@ -14,9 +15,14 @@ public class CursorManager : MonoBehaviour
     private Grid currentGrid;
 
     private Vector3 mouseWorldPos;
-    private Vector3 mouseGridPos;
+    private Vector3Int mouseGridPos;
 
     private bool isCursorEnabled;
+    private bool _isCursorPositionValid;
+
+    private ItemDetails _currentItem;
+
+    private Transform _playerTransform => FindAnyObjectByType<PlayerMovement>().transform;
 
     private void Start()
     {
@@ -39,6 +45,7 @@ public class CursorManager : MonoBehaviour
         {
             SetCursorImage(_currentSprite);
             CheckCursorValid();
+            CheckPlayerInput();
         }
         else
         {
@@ -60,20 +67,37 @@ public class CursorManager : MonoBehaviour
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
     }
 
+    #region 设置鼠标样式
+
     private void SetCursorImage(Sprite sprite)
     {
         _cursorImage.sprite = sprite;
         _cursorImage.color = new Color(1, 1, 1, 1);
     }
 
+    private void SetCursorValid()
+    {
+        _isCursorPositionValid = true;
+        _cursorImage.color = new Color(1, 1, 1, 1);
+    }
+
+    private void SetCursorInValid()
+    {
+        _isCursorPositionValid = false;
+        _cursorImage.color = new Color(1, 0, 0, 0.4f);
+    }
+
     private void OnItemSelectedEvent(ItemDetails itemInformation, bool isSelected)
     {
         if (!isSelected)
         {
+            _currentItem = null;
+            isCursorEnabled = false;
             _currentSprite = Normal;
             return;
         }
 
+        _currentItem = itemInformation;
         _currentSprite = itemInformation.ItemType switch
         {
             ItemType.ChopTool => Tool,
@@ -81,13 +105,57 @@ public class CursorManager : MonoBehaviour
             ItemType.Commodity => Item,
             _ => Normal
         };
+        isCursorEnabled = true;
+    }
+
+    #endregion
+
+    private void CheckPlayerInput()
+    {
+        if (InputManager.Instance.IsLeftMouseButtonPressed && _isCursorPositionValid)
+        {
+            // 执行对应方法
+            EventHandler.CallMouseClickEvent(mouseWorldPos, _currentItem);
+        }
     }
 
     private void CheckCursorValid()
     {
-        mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
+        // Debug.Log(mouseWorldPos);
         mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
 
+        // 判断使用范围内
+        Vector3Int playerGridPos = currentGrid.WorldToCell(_playerTransform.position);
+        if (Mathf.Abs(mouseGridPos.x - playerGridPos.x) > _currentItem.ItemUseRadius || Mathf.Abs(mouseGridPos.y - playerGridPos.y) > _currentItem.ItemUseRadius)
+        {
+            SetCursorInValid();
+            return;
+        }
+
+
+        TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPos);
+
+        if (currentTile != null)
+        {
+            switch (_currentItem.ItemType)
+            {
+                case ItemType.Commodity:
+                    if (currentTile.CanDropItem && _currentItem.CanDropped)
+                    {
+                        SetCursorValid();
+                    }
+                    else
+                    {
+                        SetCursorInValid();
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            SetCursorInValid();
+        }
     }
 
     private bool IsInteractWithUI()
@@ -102,7 +170,7 @@ public class CursorManager : MonoBehaviour
     private void OnAfterSceneLoadedEvent()
     {
         currentGrid = FindAnyObjectByType<Grid>();
-        isCursorEnabled = true;
+        // isCursorEnabled = true;
     }
 
     private void OnBeforeSceneLoadedEvent()

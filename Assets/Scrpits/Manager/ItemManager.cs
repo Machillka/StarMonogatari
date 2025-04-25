@@ -14,6 +14,7 @@ namespace Farm.Inventory
         private void OnEnable()
         {
             EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+            EventHandler.DropItemInScene += OnDropItemInScene;
             EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
@@ -21,6 +22,7 @@ namespace Farm.Inventory
         private void OnDisable()
         {
             EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+            EventHandler.DropItemInScene -= OnDropItemInScene;
             EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
@@ -38,6 +40,13 @@ namespace Farm.Inventory
 
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)
         {
+            var item = Instantiate(ItemPrefab, pos, Quaternion.identity, _itemParentTransform);
+            item.ItemID = itemID;
+        }
+
+        private void OnDropItemInScene(int itemID, Vector3 pos)
+        {
+            // TODO: 处理实际效果
             var item = Instantiate(ItemPrefab, pos, Quaternion.identity, _itemParentTransform);
             item.ItemID = itemID;
         }

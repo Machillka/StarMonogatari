@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Farm.Map
 {
-    public class GridMapManager : MonoBehaviour
+    public class GridMapManager : Singleton<GridMapManager>
     {
         [Header("Grid Information")]
         public List<MapDataSO> MapDataList;
 
         private Dictionary<string, TileDetails> itemDetailsDict = new Dictionary<string, TileDetails>();
+
+        private Grid _currentGrid;
 
         private void Start()
         {
@@ -17,6 +20,18 @@ namespace Farm.Map
             {
                 InitTileDetailDictionary(mapInformation);
             }
+        }
+
+        private void OnEnable()
+        {
+            EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
         }
 
         private void InitTileDetailDictionary(MapDataSO mapInformation)
@@ -70,6 +85,48 @@ namespace Farm.Map
                 return itemDetailsDict[key];
             }
             return null;
+        }
+
+        /// <summary>
+        /// 根据鼠标的网格坐标返回瓦片信息
+        /// </summary>
+        /// <param name="mouseGridPosition"></param>
+        /// <returns></returns>
+        public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPosition)
+        {
+            string key = mouseGridPosition.x + "x" + mouseGridPosition.y + "y" + SceneManager.GetActiveScene().name;
+            if (itemDetailsDict.ContainsKey(key))
+            {
+                return itemDetailsDict[key];
+            }
+            return null;
+        }
+
+        private void OnAfterSceneLoadedEvent()
+        {
+            _currentGrid = FindAnyObjectByType<Grid>();
+        }
+
+        /// <summary>
+        /// 执行实际效果
+        /// </summary>
+        /// <param name="mousePosition"></param>
+        /// <param name="item"></param>
+        private void OnExcuteActionAfterAnimation(Vector3 mousePosition, ItemDetails item)
+        {
+            var mouseGridPos = _currentGrid.WorldToCell(mousePosition);
+            var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
+
+            if (currentTile != null)
+            {
+                switch (item.ItemType)
+                {
+                    case ItemType.Commodity:
+                        EventHandler.CallDropItemInScene(item.ItemID, mousePosition);
+                        break;
+
+                }
+            }
         }
     }
 }

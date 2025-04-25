@@ -30,13 +30,13 @@ public class TimeManager : MonoBehaviour
 
         if (InputManager.Instance.IsShiftTimeButtonPressing)
         {
-            Debug.Log("Second" + _gameSecond + "Minutes:" + _gameMinute + "Hours" + _gameHour);
-            Debug.Log("Pressed");
+            // Debug.Log("Second" + _gameSecond + "Minutes:" + _gameMinute + "Hours" + _gameHour);
+            // Debug.Log("Pressed");
             for (int i = 0; i < 60; i++)
             {
                 UpdateGameTime();
             }
-            Debug.Log("Second" + _gameSecond + "Minutes:" + _gameMinute + "Hours" + _gameHour);
+            // Debug.Log("Second" + _gameSecond + "Minutes:" + _gameMinute + "Hours" + _gameHour);
         }
     }
 

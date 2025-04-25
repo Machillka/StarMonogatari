@@ -28,12 +28,22 @@ public class PlayerAnimation : MonoBehaviour
     {
         EventHandler.ItemSelectedEvent += OnItemSelected;
         EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
+        EventHandler.MouseClickEvent += OnMouseClickEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelected;
         EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
+        EventHandler.MouseClickEvent -= OnMouseClickEvent;
+    }
+
+    private void OnMouseClickEvent(Vector3 position, ItemDetails itemInformation)
+    {
+        // TODO: 执行对应动画
+
+        // 执行动画后的逻辑
+        EventHandler.CallExcuteActionAfterAnimation(position, itemInformation);
     }
 
     private void OnBeforeSceneLoadedEvent()

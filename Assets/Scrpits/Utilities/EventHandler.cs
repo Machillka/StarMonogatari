@@ -17,6 +17,12 @@ public class EventHandler
         InstantiateItemInScene?.Invoke(itemID, pos);
     }
 
+    public static event Action<int, Vector3> DropItemInScene;
+    public static void CallDropItemInScene(int itemID, Vector3 pos)
+    {
+        DropItemInScene?.Invoke(itemID, pos);
+    }
+
     public static UnityAction<ItemDetails, bool> ItemSelectedEvent;
     public static void CallItemSelectedEvent(ItemDetails item, bool isSelected)
     {
@@ -57,5 +63,17 @@ public class EventHandler
     public static void CallMoveToPosition(Vector3 targetPosition)
     {
         MoveToPosition?.Invoke(targetPosition);
+    }
+
+    public static UnityAction<Vector3, ItemDetails> MouseClickEvent;
+    public static void CallMouseClickEvent(Vector3 targetPosition, ItemDetails item)
+    {
+        MouseClickEvent?.Invoke(targetPosition, item);
+    }
+
+    public static UnityAction<Vector3, ItemDetails> ExcuteActionAfterAnimation;
+    public static void CallExcuteActionAfterAnimation(Vector3 targetPosition, ItemDetails item)
+    {
+        ExcuteActionAfterAnimation?.Invoke(targetPosition, item);
     }
 }

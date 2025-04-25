@@ -11,6 +11,7 @@ public class InputManager : Singleton<InputManager>
     public Vector2 MovementInput{ get; protected set; }
     public bool IsShiftTimeButtonPressed;
     public bool IsShiftTimeButtonPressing;
+    public bool IsLeftMouseButtonPressed => _inputController.Player.DropItem.WasPressedThisFrame();
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
 
