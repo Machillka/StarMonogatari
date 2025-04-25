@@ -95,10 +95,14 @@ public class PlayerAnimation : MonoBehaviour
             anim.SetFloat("InputY", _mouseY);
         }
 
+        // 播放动画
         yield return new WaitForSeconds(0.45f);
+        // 执行效果
         EventHandler.CallExcuteActionAfterAnimation(mouseWorldPosition, itemInformation);
+        // 等待效果执行
         yield return new WaitForSeconds(0.25f);
 
+        // 重新允许输入
         _isUseTool = false;
         InputManager.Instance.IsDisabledInput = false;
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -18,6 +19,8 @@ namespace Farm.Map
         private Tilemap _digTileMap;
         private Tilemap _waterTileMap;
 
+        private Seasons _currentSeason;
+
         private void Start()
         {
             //TODO: 利用addressable加载地图数据 或者其他动态加载的方式
@@ -31,12 +34,14 @@ namespace Farm.Map
         {
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
+            EventHandler.GameDayEvent += OnGameDayEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
+            EventHandler.GameDayEvent -= OnGameDayEvent;
         }
 
         private void InitTileDetailDictionary(MapDataSO mapInformation)
@@ -112,6 +117,9 @@ namespace Farm.Map
             _currentGrid = FindAnyObjectByType<Grid>();
             _digTileMap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             _waterTileMap = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
+
+            // DisplayMap(SceneManager.GetActiveScene().name);
+            RefreshMap();
         }
 
         /// <summary>
@@ -129,6 +137,10 @@ namespace Farm.Map
                 //WORKFLOW: 根据不同的物品类型来执行不同的操作
                 switch (item.ItemType)
                 {
+                    case ItemType.Seed:
+                        EventHandler.CallPlantSeedEvent(item.ItemID, currentTile);
+                        break;
+
                     case ItemType.Commodity:
                         EventHandler.CallDropItemInScene(item.ItemID, mousePosition);
                         break;
@@ -143,7 +155,32 @@ namespace Farm.Map
                         currentTile.daySinceWatered = 0;
                         break;
                 }
+
+                UpdateTileDetails(currentTile);
             }
+        }
+
+        private void OnGameDayEvent(int day, Seasons season)
+        {
+            _currentSeason = season;
+            foreach (var key in itemDetailsDict.Keys.ToList())
+            {
+                if (itemDetailsDict[key].daySinceWatered > -1)
+                {
+                    itemDetailsDict[key].daySinceWatered = -1;
+                }
+                if (itemDetailsDict[key].daySinceDug > -1)
+                {
+                    itemDetailsDict[key].daySinceDug++;
+                }
+
+                if (itemDetailsDict[key].daySinceDug > 3 && itemDetailsDict[key].seedItemID == -1)
+                {
+                    itemDetailsDict[key].daySinceDug = -1;
+                    itemDetailsDict[key].CanDig = true;
+                }
+            }
+                RefreshMap();
         }
 
         /// <summary>
@@ -175,6 +212,55 @@ namespace Farm.Map
             Vector3Int pos = new Vector3Int(tile.GridX, tile.GridY, 0);
             _waterTileMap.SetTile(pos, WaterTile);
         }
+
+        private void UpdateTileDetails(TileDetails tileInformation)
+        {
+            string key = tileInformation.GridX + "x" + tileInformation.GridY + "y" + SceneManager.GetActiveScene().name;
+            if (itemDetailsDict.ContainsKey(key))
+            {
+                itemDetailsDict[key] = tileInformation;
+            }
+            // else
+            // {
+            //     itemDetailsDict.Add(key, tileInformation);
+            // }
+        }
+
+        private void DisplayMap(string sceneName)
+        {
+            foreach (var tilePair in itemDetailsDict)
+            {
+                var key = tilePair.Key;
+                var tileDetail = tilePair.Value;
+
+                if (key.Contains(sceneName))
+                {
+                    if (tileDetail.daySinceDug > -1)
+                    {
+                        SetDigGround(tileDetail);
+                    }
+                    if (tileDetail.daySinceWatered > -1)
+                    {
+                        SetWaterGround(tileDetail);
+                    }
+                }
+            }
+        }
+
+        private void RefreshMap()
+        {
+            if (_digTileMap != null)
+            {
+                _digTileMap.ClearAllTiles();
+            }
+            if (_waterTileMap != null)
+            {
+                _waterTileMap.ClearAllTiles();
+            }
+
+            DisplayMap(SceneManager.GetActiveScene().name);
+        }
+
     }
 }
 

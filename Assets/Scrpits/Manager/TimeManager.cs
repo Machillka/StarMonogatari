@@ -69,7 +69,7 @@ public class TimeManager : MonoBehaviour
                 _gameHour++;
                 _gameMinute = 0;
 
-                if (_gameHour >= Settings.hourHold)
+                if (_gameHour > Settings.hourHold)
                 {
                     _gameDay++;
                     _gameHour = 0;
@@ -106,7 +106,10 @@ public class TimeManager : MonoBehaviour
                                 _gameYear = 1;
                             }
                         }
+
                     }
+                    // 每天刷新农作物和地图
+                    EventHandler.CallGameDayChangeEvent(_gameDay, _gameSeason);
                 }
                 EventHandler.CallDataChangeEvent(_gameHour, _gameDay, _gameMonth, _gameYear, _gameSeason);
             }

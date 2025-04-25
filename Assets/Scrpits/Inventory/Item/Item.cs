@@ -17,15 +17,19 @@ namespace Farm.Inventory
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _collider2D = GetComponent<BoxCollider2D>();
-        }
-
-        private void Start()
-        {
             if (ItemID != 0)
             {
                 Init(ItemID);
             }
         }
+
+        // private void Start()
+        // {
+        //     if (ItemID != 0)
+        //     {
+        //         Init(ItemID);
+        //     }
+        // }
 
         public void Init(int ID)
         {

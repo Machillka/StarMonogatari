@@ -35,6 +35,13 @@ public class EventHandler
         GameMinuteEvent?.Invoke(minute, hour);
     }
 
+    public static UnityAction<int, Seasons> GameDayEvent;
+    public static void CallGameDayChangeEvent(int day, Seasons season)
+    {
+        GameDayEvent?.Invoke(day, season);
+        Debug.Log("day change");
+    }
+
     public static event Action<int, int, int, int, Seasons> GameDateEvent;//TODO: 观察者模式，对于每一个时间单位都写一个事件
     public static void CallDataChangeEvent(int hour, int day, int month, int year, Seasons season)
     {
@@ -75,5 +82,11 @@ public class EventHandler
     public static void CallExcuteActionAfterAnimation(Vector3 targetPosition, ItemDetails item)
     {
         ExcuteActionAfterAnimation?.Invoke(targetPosition, item);
+    }
+
+    public static UnityAction<int, TileDetails> PlantSeedEvent;
+    public static void CallPlantSeedEvent(int seedID, TileDetails tile)
+    {
+        PlantSeedEvent?.Invoke(seedID, tile);
     }
 }

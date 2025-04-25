@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b3eba67fd815540b173931244fca0b, type: 3}
+  m_Name: CropDataListSO
+  m_EditorClassIdentifier: 
+  CropDataList:
+  - SeedItemID: 1005
+    GrowthDays: 0100000002000000020000000300000003000000
+    GrowthStagePrefab:
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    GrowthStageSprites:
+    - {fileID: -2058122700, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: 1098745238, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1012976577, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1730499155, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1080373613, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    Seasons: 0000000001000000
+    HarvestToolItemID: 01040000
+    RequireActionCount: 01000000
+    transferItemID: -1
+    ProducedItemID: f6030000
+    ProduceMinAmount: 00000000
+    ProduceMaxAmount: 000000000000000000000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    GenerateAtPlayerPosition: 1
+    IsHadAnimation: 0
+    IsHadParticalEffect: 0
+  - SeedItemID: 1006
+    GrowthDays: 0100000002000000020000000300000003000000
+    GrowthStagePrefab:
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    - {fileID: 7426718844823180131, guid: e8640b7dc3f66514fa3fa17bc9223053, type: 3}
+    GrowthStageSprites:
+    - {fileID: -1270250029, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: 1885931999, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: -1817254309, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: 816233219, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: -173135368, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    Seasons: 0000000002000000
+    HarvestToolItemID: 01040000
+    RequireActionCount: 01000000
+    transferItemID: 0
+    ProducedItemID: f7030000
+    ProduceMinAmount: 000000000000000000000000
+    ProduceMaxAmount: 0000000000000000000000000000000000000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 3
+    RegrowTimes: 2
+    GenerateAtPlayerPosition: 1
+    IsHadAnimation: 0
+    IsHadParticalEffect: 0
+  - SeedItemID: 0
+    GrowthDays: 
+    GrowthStagePrefab: []
+    GrowthStageSprites: []
+    Seasons: 
+    HarvestToolItemID: 
+    RequireActionCount: 
+    transferItemID: 0
+    ProducedItemID: 
+    ProduceMinAmount: 
+    ProduceMaxAmount: 
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    GenerateAtPlayerPosition: 0
+    IsHadAnimation: 0
+    IsHadParticalEffect: 0
+  - SeedItemID: 0
+    GrowthDays: 
+    GrowthStagePrefab: []
+    GrowthStageSprites: []
+    Seasons: 
+    HarvestToolItemID: 
+    RequireActionCount: 
+    transferItemID: 0
+    ProducedItemID: 
+    ProduceMinAmount: 
+    ProduceMaxAmount: 
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    GenerateAtPlayerPosition: 0
+    IsHadAnimation: 0
+    IsHadParticalEffect: 0
+  - SeedItemID: 0
+    GrowthDays: 
+    GrowthStagePrefab: []
+    GrowthStageSprites: []
+    Seasons: 
+    HarvestToolItemID: 
+    RequireActionCount: 
+    transferItemID: 0
+    ProducedItemID: 
+    ProduceMinAmount: 
+    ProduceMaxAmount: 
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    GenerateAtPlayerPosition: 0
+    IsHadAnimation: 0
+    IsHadParticalEffect: 0

@@ -144,6 +144,12 @@ public class CursorManager : MonoBehaviour
             //WORKFLOW 补齐所有物品判断
             switch (_currentItem.ItemType)
             {
+                case ItemType.Seed:
+                    if (currentTile.daySinceDug > -1 && currentTile.seedItemID == -1)
+                        SetCursorValid();
+                    else
+                        SetCursorInValid();
+                    break;
                 case ItemType.Commodity:
                     if (currentTile.CanDropItem && _currentItem.CanDropped)
                         SetCursorValid();
