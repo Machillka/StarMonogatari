@@ -41,7 +41,7 @@ namespace Farm.Inventory
             // 延迟了这么长时间后 如果依旧在 hovering 则使用方法
             if (_isHovering)
             {
-                if (_slotUI.SlotItem != null)
+                if (_slotUI.ItemAmount != 0)
                 {
                     _inventoryUI.ItemToolTip.gameObject.SetActive(true);
                     _inventoryUI.ItemToolTip.SetupToolTip(_slotUI.SlotItem, _slotUI.SlotType);
