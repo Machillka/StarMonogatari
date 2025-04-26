@@ -95,4 +95,10 @@ public class EventHandler
     {
         HarvestAtPlaterPositionEvent?.Invoke(itemID);
     }
+
+    public static UnityAction RefreshCurrentMapEvent;
+    public static void CallRefreshCurrentMapEvent()
+    {
+        RefreshCurrentMapEvent?.Invoke();
+    }
 }

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
-    public CropDetails CropDetail;
+    public CropDetails CropInformation;
     private int _harvestActionCount;
+    private TileDetails _tileDetails;
 
     private void Awake()
     {
@@ -15,11 +16,12 @@ public class Crop : MonoBehaviour
         _harvestActionCount = 0;
     }
 
-    public void ProcessToolAction(ItemDetails tool)
+    public void ProcessToolAction(ItemDetails tool, TileDetails tileInformattion)
     {
         // Debug.Log("Processing!");
+        _tileDetails = tileInformattion;
 
-        int requireActionCount = CropDetail.GetTotalRequireCount(tool.ItemID);
+        int requireActionCount = CropInformation.GetTotalRequireCount(tool.ItemID);
 
         // Debug.Log("RequireActionCount: " + requireActionCount.ToString());
 
@@ -39,7 +41,7 @@ public class Crop : MonoBehaviour
 
         if (_harvestActionCount >= requireActionCount)
         {
-            if (CropDetail.GenerateAtPlayerPosition)
+            if (CropInformation.GenerateAtPlayerPosition)
             {
                 // Debug.Log("Harvesting");
                 SpawnHarvestItems();
@@ -49,27 +51,52 @@ public class Crop : MonoBehaviour
 
     private void SpawnHarvestItems()
     {
-        for (int i = 0; i < CropDetail.ProducedItemID.Length; i++)
+        for (int i = 0; i < CropInformation.ProducedItemID.Length; i++)
         {
             int amountToProduce;
-            // Debug.Log($"ProduceMinAmount:{CropDetail.ProduceMinAmount[i]}  | Max:{CropDetail.ProduceMaxAmount[i]} ");
-            if (CropDetail.ProduceMinAmount[i] == CropDetail.ProduceMaxAmount[i])
+            // Debug.Log($"ProduceMinAmount:{CropInformation.ProduceMinAmount[i]}  | Max:{CropInformation.ProduceMaxAmount[i]} ");
+            if (CropInformation.ProduceMinAmount[i] == CropInformation.ProduceMaxAmount[i])
             {
-                amountToProduce = CropDetail.ProduceMinAmount[i];
+                amountToProduce = CropInformation.ProduceMinAmount[i];
             }
             else
             {
-                amountToProduce = Random.Range(CropDetail.ProduceMinAmount[i], CropDetail.ProduceMaxAmount[i] + 1);
+                amountToProduce = Random.Range(CropInformation.ProduceMinAmount[i], CropInformation.ProduceMaxAmount[i] + 1);
             }
             // Debug.Log($"Produce {amountToProduce} of item");
             for (int j = 0; j < amountToProduce; j++)
             {
-                if (CropDetail.GenerateAtPlayerPosition)
+                if (CropInformation.GenerateAtPlayerPosition)
                 {
                     // Debug.Log("Spawn at Player Position");
-                    EventHandler.CallHarvestAtPlaterPositionEvent(CropDetail.ProducedItemID[i]);
+                    EventHandler.CallHarvestAtPlaterPositionEvent(CropInformation.ProducedItemID[i]);
+                }
+                else        // TODO: 世界地图生成
+                {
+
                 }
             }
+        }
+
+        if (_tileDetails != null)
+        {
+            _tileDetails.daySinceLastHarvest++;
+
+            if (CropInformation.DaysToRegrow > 0 && _tileDetails.daySinceLastHarvest < CropInformation.RegrowTimes)
+            {
+                _tileDetails.growthDays = CropInformation.TotalGrouthDays - CropInformation.DaysToRegrow;
+                EventHandler.CallRefreshCurrentMapEvent();
+            }
+            else
+            {
+                _tileDetails.daySinceLastHarvest = -1;
+                _tileDetails.seedItemID = -1;
+
+                // 重新挖坑
+                // _tileDetails.daySinceDug = -1;
+            }
+
+            Destroy(gameObject);
         }
     }
 }

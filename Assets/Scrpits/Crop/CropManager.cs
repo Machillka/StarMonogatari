@@ -105,7 +105,7 @@ namespace Farm.CropPlant
             GameObject crop = Instantiate(cropPrefab, cropPosition, Quaternion.identity, _cropParent);
             //TODO: 使用事件实现
             crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
-            crop.GetComponent<Crop>().CropDetail = cropInformation;
+            crop.GetComponent<Crop>().CropInformation = cropInformation;
         }
     }
 }

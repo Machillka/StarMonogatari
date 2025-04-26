@@ -36,6 +36,7 @@ namespace Farm.Map
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
             EventHandler.GameDayEvent += OnGameDayEvent;
+            EventHandler.RefreshCurrentMapEvent += RefreshMap;
         }
 
         private void OnDisable()
@@ -43,6 +44,7 @@ namespace Farm.Map
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
             EventHandler.GameDayEvent -= OnGameDayEvent;
+            EventHandler.RefreshCurrentMapEvent -= RefreshMap;
         }
 
         private void InitTileDetailDictionary(MapDataSO mapInformation)
@@ -160,7 +162,7 @@ namespace Farm.Map
                         Crop currentCrop = GetCropObject(mousePosition);
                         if (currentCrop != null)
                         {
-                            currentCrop.ProcessToolAction(item);
+                            currentCrop.ProcessToolAction(item, currentTile);
                         }
                         break;
                 }
