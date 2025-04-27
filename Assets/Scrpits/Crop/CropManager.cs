@@ -104,7 +104,7 @@ namespace Farm.CropPlant
             Vector3 cropPosition = new Vector3(tileInformation.GridX + 0.5f, tileInformation.GridY + 0.5f, 0);
             GameObject crop = Instantiate(cropPrefab, cropPosition, Quaternion.identity, _cropParent);
             //TODO: 使用事件实现
-            crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
+            crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;          // BUG[x]: 没有生成对应的图片
             crop.GetComponent<Crop>().CropInformation = cropInformation;
             crop.GetComponent<Crop>().tileDetails = tileInformation;                    // TODO:写一个赋值方法
         }

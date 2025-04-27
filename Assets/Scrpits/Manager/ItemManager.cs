@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Farm.Inventory
 {
-    public class ItemManager : MonoBehaviour
+    public class ItemManager : Singleton<ItemManager>
     {
         public Item ItemPrefab;
         public Item BounceItemPrefab;
@@ -44,7 +43,9 @@ namespace Farm.Inventory
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)
         {
             var item = Instantiate(ItemPrefab, pos, Quaternion.identity, _itemParentTransform);
-            item.ItemID = itemID;
+            item.ItemID = itemID;                                       //BUG[x]: 生成的物品没有对应的图片
+            item.Init(itemID);
+            // Debug.Log($"Instantiated ItemID: {itemID}, Position: {pos}");
         }
 
         //TODO: 设置两个事件，一个是remove from bag; 另一个是 drop
@@ -54,8 +55,9 @@ namespace Farm.Inventory
                 return;     // 是种子就不生成新物体
 
             // TODO[x]: 处理实际效果
-                var item = Instantiate(BounceItemPrefab, _playerTransform.position, Quaternion.identity, _itemParentTransform);
-            item.ItemID = itemID;
+            var item = Instantiate(BounceItemPrefab, _playerTransform.position, Quaternion.identity, _itemParentTransform);
+            // item.ItemID = itemID;
+            item.Init(itemID);
 
             var dir = (mousePosition - _playerTransform.position).normalized;
             item.GetComponent<ItemDropBounce>().InitBounceItem(mousePosition, dir);

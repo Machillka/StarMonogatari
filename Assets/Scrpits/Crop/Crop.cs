@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
-
+/*
+此处存放的 tiledetail 是当前种植的格子信息，与全局信息 " 无关 "
+因为在全局刷新地图的时候, 会 destroy 所有包含有 <crop> 组件的物体
+*/
 public class Crop : MonoBehaviour
 {
     public CropDetails CropInformation;
@@ -73,10 +76,10 @@ public class Crop : MonoBehaviour
 
                 StartCoroutine(HarvestAfterAnimation());
             }
-            // else
-            // {
-            //     SpawnHarvestItems();
-            // }
+            else
+            {
+                SpawnHarvestItems();
+            }
         }
     }
 
@@ -90,6 +93,17 @@ public class Crop : MonoBehaviour
         SpawnHarvestItems();
 
         // 转化物品
+        if (CropInformation.transferItemID > 0)
+            CreateTransferCrop();
+    }
+
+    private void CreateTransferCrop()
+    {
+        tileDetails.seedItemID = CropInformation.transferItemID;
+        tileDetails.growthDays = 0;
+        tileDetails.daySinceLastHarvest = -1;
+
+        EventHandler.CallRefreshCurrentMapEvent();
     }
 
     /// <summary>
@@ -119,7 +133,14 @@ public class Crop : MonoBehaviour
                 }
                 else        // TODO: 世界地图生成
                 {
-
+                    var dirX = transform.position.x > _playerTransform.position.x ? 1 : -1;
+                    // 随机生成物品的坐标
+                    var spawnPos = new Vector3(
+                        transform.position.x + Random.Range(dirX, CropInformation.SpawnRadius.x * dirX),
+                        transform.position.y + Random.Range(-CropInformation.SpawnRadius.y, CropInformation.SpawnRadius.y),
+                        0f
+                    );
+                    EventHandler.CallInstantiateItemInScene(CropInformation.ProducedItemID[i], spawnPos);
                 }
             }
         }

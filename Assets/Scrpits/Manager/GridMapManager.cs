@@ -310,8 +310,9 @@ namespace Farm.Map
 
             foreach (var crop in FindObjectsByType<Crop>(FindObjectsSortMode.None))
             {
-                Debug.Log($"Destroying {crop}");
+                // Debug.Log($"Destroying {crop}");
                 Destroy(crop.gameObject);
+                // FIXME: 不应该直接销毁，一个是开销；另一个是可能会有引用问题（Dowtween 做树木透明度变化的时候会出现空物体）
             }
 
             DisplayMap(SceneManager.GetActiveScene().name);

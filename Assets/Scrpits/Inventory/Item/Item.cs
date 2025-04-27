@@ -17,15 +17,26 @@ namespace Farm.Inventory
         {
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _collider2D = GetComponent<BoxCollider2D>();
+            // Debug.Log($"In Awake ID is :{ItemID}");
             if (ItemID != 0)
             {
                 Init(ItemID);
             }
         }
 
+        // public void Start()
+        // {
+        //     //NOTE: 认为还是在生成的时候执行一次比较好
+        //     if (ItemID != 0)
+        //     {
+        //         Init(ItemID);
+        //     }
+        // }
+
         public void Init(int ID)
         {
             ItemID = ID;
+            // Debug.Log($"In Init ID is :{ItemID}");
             _itemDetails = InventoryManager.Instance.GetItemDetails(ItemID);
 
             if (_itemDetails != null)

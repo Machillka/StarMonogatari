@@ -6,13 +6,16 @@ namespace Farm.Inventory
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            // Debug.Log("Trigger");
+            //BUG[x]: 新生成的物品不会被拾取
             Item item = collision.GetComponent<Item>();
-            if (item != null)
+
+            if (item == null)
+                return;
+
+            if (item.ItemDetails != null)
             {
-                if (item.ItemDetails != null)
-                {
-                    InventoryManager.Instance.AddItem(item, true);
-                }
+                InventoryManager.Instance.AddItem(item, true);
             }
         }
     }
