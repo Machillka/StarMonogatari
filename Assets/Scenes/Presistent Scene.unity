@@ -1431,6 +1431,9 @@ MonoBehaviour:
   - holdType: 1
     bodyPart: 2
     overrideController: {fileID: 22100000, guid: 1ca6afc033f10b748860edaf932400ee, type: 2}
+  - holdType: 5
+    bodyPart: 2
+    overrideController: {fileID: 22100000, guid: 7fa8a66872d03b14fa039137ece3de38, type: 2}
   - holdType: 4
     bodyPart: 2
     overrideController: {fileID: 22100000, guid: cc4e240dc51b95441aabdfeabba67758, type: 2}
@@ -1440,33 +1443,30 @@ MonoBehaviour:
   - holdType: 2
     bodyPart: 3
     overrideController: {fileID: 22100000, guid: 8d96ee4716c8d95408df4283d32f1fd1, type: 2}
-  - holdType: 4
-    bodyPart: 0
-    overrideController: {fileID: 22100000, guid: 8f94d2ee110785147a4577ab765ea8f7, type: 2}
-  - holdType: 4
+  - holdType: 5
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: 7ba1d93543ac04f4ca37342743a859c5, type: 2}
+  - holdType: 6
+    bodyPart: 3
+    overrideController: {fileID: 22100000, guid: a4de008fb01d3af44b873d3b940bed97, type: 2}
+  - holdType: 0
     bodyPart: 1
-    overrideController: {fileID: 22100000, guid: fcdb8953a68f84043bcf9c75777bc3af, type: 2}
+    overrideController: {fileID: 22100000, guid: 4ed4067a4b7187d4cb47ba5d7cdb0c2d, type: 2}
   - holdType: 5
     bodyPart: 1
     overrideController: {fileID: 22100000, guid: b21a045c4ced32f4abca030980fa2a4b, type: 2}
+  - holdType: 4
+    bodyPart: 1
+    overrideController: {fileID: 22100000, guid: fcdb8953a68f84043bcf9c75777bc3af, type: 2}
+  - holdType: 0
+    bodyPart: 0
+    overrideController: {fileID: 22100000, guid: 0e31436c237a4ed49ac340a7dfc2fad3, type: 2}
   - holdType: 5
     bodyPart: 0
     overrideController: {fileID: 22100000, guid: ec1ea2ba8202d534f9fcda3b1ce71135, type: 2}
-  - holdType: 5
-    bodyPart: 2
-    overrideController: {fileID: 22100000, guid: 7fa8a66872d03b14fa039137ece3de38, type: 2}
-  - holdType: 1
-    bodyPart: 3
-    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
-  - holdType: 1
-    bodyPart: 3
-    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
-  - holdType: 1
-    bodyPart: 3
-    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
-  - holdType: 1
-    bodyPart: 3
-    overrideController: {fileID: 22100000, guid: abbf7466bea8f9b48a2765715d5966c0, type: 2}
+  - holdType: 4
+    bodyPart: 0
+    overrideController: {fileID: 22100000, guid: 8f94d2ee110785147a4577ab765ea8f7, type: 2}
 --- !u!1 &1437397874
 GameObject:
   m_ObjectHideFlags: 0

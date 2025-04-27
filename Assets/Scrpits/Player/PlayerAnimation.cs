@@ -68,7 +68,7 @@ public class PlayerAnimation : MonoBehaviour
             && itemInformation.ItemType != ItemType.Furniture)
         {
             _mouseX = mouseWorldPosition.x - transform.position.x;
-            _mouseY = mouseWorldPosition.y - transform.position.y;
+            _mouseY = mouseWorldPosition.y - (transform.position.y + 0.85f);        // 位置到人物中间
 
             if (Mathf.Abs(_mouseX) > Mathf.Abs(_mouseY))
             {
@@ -138,6 +138,7 @@ public class PlayerAnimation : MonoBehaviour
             ItemType.HoeTool => PlayerHoldPartTypes.Hoe,
             ItemType.CollectTool => PlayerHoldPartTypes.Collect,
             ItemType.WaterTool => PlayerHoldPartTypes.Water,
+            ItemType.ChopTool => PlayerHoldPartTypes.Chop,
             _ => PlayerHoldPartTypes.None
         };
         if (isSelected == false)

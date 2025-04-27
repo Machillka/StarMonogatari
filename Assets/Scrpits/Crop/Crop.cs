@@ -1,10 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
     public CropDetails CropInformation;
     private int _harvestActionCount;
-    private TileDetails _tileDetails;
+    public TileDetails tileDetails;
+    private Animator _anim;
+    private Transform _playerTransform => FindAnyObjectByType<PlayerMovement>().transform;
+
+    public bool CanHarvest => tileDetails != null && tileDetails.growthDays >= CropInformation.TotalGrouthDays;
 
     private void Awake()
     {
@@ -18,25 +23,34 @@ public class Crop : MonoBehaviour
 
     public void ProcessToolAction(ItemDetails tool, TileDetails tileInformattion)
     {
-        // Debug.Log("Processing!");
-        _tileDetails = tileInformattion;
+        tileDetails = tileInformattion;
 
         int requireActionCount = CropInformation.GetTotalRequireCount(tool.ItemID);
-
-        // Debug.Log("RequireActionCount: " + requireActionCount.ToString());
 
         if (requireActionCount == -1)
             return;
 
-        // TODO: 判断动画
-
-        // TODO: 判断特效
+        _anim = GetComponentInChildren<Animator>();
 
         // TODO[x]: 计数器
         if (_harvestActionCount < requireActionCount)
         {
             _harvestActionCount++;
-            // Debug.Log("HarvestActionCount + 1");
+
+            // TODO: 判断动画
+            if (_anim != null && CropInformation.IsHadAnimation)
+            {
+                if (_playerTransform.position.x < transform.position.x)
+                {
+                    _anim.SetTrigger("RotateRight");
+                }
+                else
+                {
+                    _anim.SetTrigger("RotateLeft");
+                }
+            }
+
+            // TODO: 判断特效
         }
 
         if (_harvestActionCount >= requireActionCount)
@@ -46,9 +60,41 @@ public class Crop : MonoBehaviour
                 // Debug.Log("Harvesting");
                 SpawnHarvestItems();
             }
+            else if (CropInformation.IsHadAnimation)
+            {
+                if (_playerTransform.position.x < transform.position.x)
+                {
+                    _anim.SetTrigger("FallRight");
+                }
+                else
+                {
+                    _anim.SetTrigger("FallLeft");
+                }
+
+                StartCoroutine(HarvestAfterAnimation());
+            }
+            // else
+            // {
+            //     SpawnHarvestItems();
+            // }
         }
     }
 
+    private IEnumerator HarvestAfterAnimation()
+    {
+        while (_anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        {
+            yield return null;
+        }
+
+        SpawnHarvestItems();
+
+        // 转化物品
+    }
+
+    /// <summary>
+    /// 生成收获的物品
+    /// </summary>
     private void SpawnHarvestItems()
     {
         for (int i = 0; i < CropInformation.ProducedItemID.Length; i++)
@@ -78,22 +124,22 @@ public class Crop : MonoBehaviour
             }
         }
 
-        if (_tileDetails != null)
+        if (tileDetails != null)
         {
-            _tileDetails.daySinceLastHarvest++;
+            tileDetails.daySinceLastHarvest++;
 
-            if (CropInformation.DaysToRegrow > 0 && _tileDetails.daySinceLastHarvest < CropInformation.RegrowTimes)
+            if (CropInformation.DaysToRegrow > 0 && tileDetails.daySinceLastHarvest < CropInformation.RegrowTimes)
             {
-                _tileDetails.growthDays = CropInformation.TotalGrouthDays - CropInformation.DaysToRegrow;
+                tileDetails.growthDays = CropInformation.TotalGrouthDays - CropInformation.DaysToRegrow;
                 EventHandler.CallRefreshCurrentMapEvent();
             }
             else
             {
-                _tileDetails.daySinceLastHarvest = -1;
-                _tileDetails.seedItemID = -1;
+                tileDetails.daySinceLastHarvest = -1;
+                tileDetails.seedItemID = -1;
 
                 // 重新挖坑
-                // _tileDetails.daySinceDug = -1;
+                // tileDetails.daySinceDug = -1;
             }
 
             Destroy(gameObject);

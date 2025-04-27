@@ -106,6 +106,7 @@ namespace Farm.CropPlant
             //TODO: 使用事件实现
             crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
             crop.GetComponent<Crop>().CropInformation = cropInformation;
+            crop.GetComponent<Crop>().tileDetails = tileInformation;                    // TODO:写一个赋值方法
         }
     }
 }

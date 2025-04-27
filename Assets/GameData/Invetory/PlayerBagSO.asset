@@ -15,16 +15,16 @@ MonoBehaviour:
   InventoryItemList:
   - ItemID: 1002
     ItemAmount: 1
-  - ItemID: 1024
+  - ItemID: 1001
     ItemAmount: 1
-  - ItemID: 1014
-    ItemAmount: 235
+  - ItemID: 1006
+    ItemAmount: 97
   - ItemID: 1023
     ItemAmount: 7
   - ItemID: 1008
     ItemAmount: 1
-  - ItemID: 1005
-    ItemAmount: 93
+  - ItemID: 1026
+    ItemAmount: 19
   - ItemID: 1025
     ItemAmount: 1
   - ItemID: 0

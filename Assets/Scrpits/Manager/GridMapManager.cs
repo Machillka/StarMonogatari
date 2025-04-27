@@ -137,6 +137,7 @@ namespace Farm.Map
 
             if (currentTile != null)
             {
+                Crop currentCrop = GetCropObject(mousePosition);
                 //WORKFLOW: 根据不同的物品类型来执行不同的操作
                 switch (item.ItemType)
                 {
@@ -159,10 +160,15 @@ namespace Farm.Map
                         currentTile.daySinceWatered = 0;
                         break;
                     case ItemType.CollectTool:
-                        Crop currentCrop = GetCropObject(mousePosition);
                         if (currentCrop != null)
                         {
                             currentCrop.ProcessToolAction(item, currentTile);
+                        }
+                        break;
+                    case ItemType.ChopTool:
+                        if (currentCrop != null)
+                        {
+                            currentCrop.ProcessToolAction(item, currentCrop.tileDetails);
                         }
                         break;
                 }
@@ -176,7 +182,7 @@ namespace Farm.Map
         /// </summary>
         /// <param name="mouseWorldPosition"></param>
         /// <returns></returns>
-        private Crop GetCropObject(Vector3 mouseWorldPosition)
+        public Crop GetCropObject(Vector3 mouseWorldPosition)
         {
             Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
             Crop currentCrop = null;
