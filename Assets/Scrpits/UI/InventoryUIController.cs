@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace Farm.Inventory
 {
+    // FIXME: 通过单例运行 Inventory
     public class InventoryUIController : MonoBehaviour
     {
         public ItemToolTipContoller ItemToolTip;

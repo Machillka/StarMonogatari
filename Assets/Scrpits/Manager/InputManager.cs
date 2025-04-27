@@ -1,6 +1,6 @@
 using UnityEngine;
-using System;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// 用于监听按键输入
@@ -29,6 +29,7 @@ public class InputManager : Singleton<InputManager>
     private void OnEnable()
     {
         _inputController.Enable();
+        _inputController.ActionBar.SelectSlot.performed += OnSelectSlotEvent;
         EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
     }
@@ -36,8 +37,16 @@ public class InputManager : Singleton<InputManager>
     private void OnDisable()
     {
         _inputController.Disable();
+        _inputController.ActionBar.SelectSlot.performed -= OnSelectSlotEvent;
         EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+    }
+
+    private void OnSelectSlotEvent(InputAction.CallbackContext context)
+    {
+        if (int.TryParse(context.control.name, out int index))
+            Debug.Log($"按下的按键为{index}");
+        EventHandler.CallOnSelectSlotEvent(context);
     }
 
     private void OnAfterSceneLoadedEvent()

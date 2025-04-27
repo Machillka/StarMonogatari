@@ -42,9 +42,10 @@ namespace Farm.Inventory
 
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)
         {
-            var item = Instantiate(ItemPrefab, pos, Quaternion.identity, _itemParentTransform);
+            var item = Instantiate(BounceItemPrefab, pos, Quaternion.identity, _itemParentTransform);
             item.ItemID = itemID;                                       //BUG[x]: 生成的物品没有对应的图片
             item.Init(itemID);
+            item.GetComponent<ItemDropBounce>().InitBounceItem(pos, Vector3.up * 0.7f);            // 生成物品拥有弹跳下落效果
             // Debug.Log($"Instantiated ItemID: {itemID}, Position: {pos}");
         }
 

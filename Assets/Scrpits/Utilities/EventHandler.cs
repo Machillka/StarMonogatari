@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 public class EventHandler
 {
     public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
@@ -100,5 +101,11 @@ public class EventHandler
     public static void CallRefreshCurrentMapEvent()
     {
         RefreshCurrentMapEvent?.Invoke();
+    }
+
+    public static event Action<InputAction.CallbackContext> SelectSlotEvent;
+    public static void CallOnSelectSlotEvent(InputAction.CallbackContext context)
+    {
+        SelectSlotEvent?.Invoke(context);
     }
 }

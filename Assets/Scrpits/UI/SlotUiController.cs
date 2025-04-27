@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Farm.Inventory
 {
@@ -19,6 +20,7 @@ namespace Farm.Inventory
         public int ItemAmount;
         public int SlotIndex;
 
+        // public InventoryUIController InventoryUI => _inventoryUI;
         private InventoryUIController _inventoryUI => GetComponentInParent<InventoryUIController>();
 
         private void Start()
@@ -27,6 +29,39 @@ namespace Farm.Inventory
             if (SlotItem.ItemID == 0)
             {
                 EmptySlot();
+            }
+        }
+
+        private void OnEnable()
+        {
+            EventHandler.SelectSlotEvent += OnSelectSlotEvent;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.SelectSlotEvent -= OnSelectSlotEvent;
+        }
+
+        private void OnSelectSlotEvent(InputAction.CallbackContext context)
+        {
+            string keyPressed = context.control.name;
+
+            if (int.TryParse(keyPressed, out int index))
+            {
+                // slot -> 0, 1, 2, 3, ..., 8, 9
+                //index -> 1, 2, 3, 4, ..., 9, 0
+                if (index != (SlotIndex + 1) % 10 || ItemAmount == 0)
+                    return;
+
+                IsSelected = !IsSelected;
+
+                if (IsSelected)
+                    _inventoryUI.UpdateSlotHighlight(SlotIndex);
+                else
+                    _inventoryUI.UpdateSlotHighlight(-1);
+
+                if (SlotType == SlotTypes.Bag)
+                    EventHandler.CallItemSelectedEvent(SlotItem, IsSelected);
             }
         }
 
