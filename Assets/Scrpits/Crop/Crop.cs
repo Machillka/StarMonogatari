@@ -30,10 +30,15 @@ public class Crop : MonoBehaviour
     {
         tileDetails = tileInformattion;
 
+        // Debug.Log($"In ProcessToolAction, tool = {tool.ItemName}, tileInformatin: growthDays = {tileInformattion.growthDays}");
+
         int requireActionCount = CropInformation.GetTotalRequireCount(tool.ItemID);
 
         if (requireActionCount == -1)
+        {
+            Debug.LogWarning("不需要收获工具");
             return;
+        }
 
         _anim = GetComponentInChildren<Animator>();
 

@@ -106,6 +106,7 @@ public class CursorManager : MonoBehaviour
             ItemType.HoeTool => Tool,
             ItemType.WaterTool => Tool,
             ItemType.CollectTool => Tool,
+            ItemType.BreakTool => Tool,
             ItemType.Seed => Seed,
             ItemType.Commodity => Item,
             _ => Normal
@@ -178,14 +179,18 @@ public class CursorManager : MonoBehaviour
                     else
                         SetCursorInValid();
                     break;
+                case ItemType.BreakTool:
                 case ItemType.ChopTool: //FIXME: 树的判断有问题
                     if (crop != null)
                     {
+                        // Debug.Log($"GrouthTotalDays = {crop.CropInformation.TotalGrouthDays}; GrouthDays = {crop.tileDetails.growthDays}");
                         if (currentCrop != null && crop.CanHarvest && crop.CropInformation.CheckToolAvaliable(_currentItem.ItemID))
                             SetCursorValid();
                         else
                             SetCursorInValid();
                     }
+                    else
+                        SetCursorInValid();
                     break;
             }
         }

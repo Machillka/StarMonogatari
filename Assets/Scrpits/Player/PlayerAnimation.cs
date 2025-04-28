@@ -51,11 +51,16 @@ public class PlayerAnimation : MonoBehaviour
         Sprite itemSprite = InventoryManager.Instance.GetItemDetails(itemID).ItemOnWorldSprite;
         if (_holdItem.enabled == false)
         {
-            Debug.Log("start show Item");
+            // Debug.Log("start show Item");
             StartCoroutine(ShowItem(itemSprite));
         }
     }
 
+    /// <summary>
+    /// 播放动画并且实现效果
+    /// </summary>
+    /// <param name="mouseWorldPosition">鼠标的世界坐标</param>
+    /// <param name="itemInformation">当前选中的 item 信息</param>
     private void OnMouseClickEvent(Vector3 mouseWorldPosition, ItemDetails itemInformation)
     {
         if (_isUseTool)
@@ -140,6 +145,7 @@ public class PlayerAnimation : MonoBehaviour
             ItemType.CollectTool => PlayerHoldPartTypes.Collect,
             ItemType.WaterTool => PlayerHoldPartTypes.Water,
             ItemType.ChopTool => PlayerHoldPartTypes.Chop,
+            ItemType.BreakTool => PlayerHoldPartTypes.Break,
             _ => PlayerHoldPartTypes.None
         };
         if (isSelected == false)

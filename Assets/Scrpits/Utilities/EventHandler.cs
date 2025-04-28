@@ -28,6 +28,7 @@ public class EventHandler
     public static UnityAction<ItemDetails, bool> ItemSelectedEvent;
     public static void CallItemSelectedEvent(ItemDetails item, bool isSelected)
     {
+        // Debug.Log($"ItemSelectedEvent, item = {item.ItemName}, isSelected = {isSelected}");
         ItemSelectedEvent?.Invoke(item, isSelected);
     }
 
@@ -114,5 +115,11 @@ public class EventHandler
     public static void CallParticalEffectEvent(ParticalEffetcTypes type, Vector3 pos)
     {
         ParticalEffectEvent?.Invoke(type, pos);
+    }
+
+    public static UnityAction GenerateCropEvent;
+    public static void CallGenerateCropEvent()
+    {
+        GenerateCropEvent?.Invoke();
     }
 }
