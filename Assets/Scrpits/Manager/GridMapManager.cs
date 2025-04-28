@@ -25,6 +25,8 @@ namespace Farm.Map
         [Header("Scene Information")]
         private Dictionary<string, bool> _isFirstLoadScene = new Dictionary<string, bool>();
 
+        private List<ReapItem> _itemsInRadius;
+
         private void Start()
         {
             //TODO: 利用addressable加载地图数据 或者其他动态加载的方式
@@ -59,12 +61,13 @@ namespace Farm.Map
 
             if (_isFirstLoadScene[SceneManager.GetActiveScene().name])
             {
+                Debug.Log("Generating Crops");
                 EventHandler.CallGenerateCropEvent();
                 _isFirstLoadScene[SceneManager.GetActiveScene().name] = false;
             }
 
             // DisplayMap(SceneManager.GetActiveScene().name);
-                RefreshMap();
+            RefreshMap();
         }
 
         /// <summary>
@@ -74,7 +77,7 @@ namespace Farm.Map
         /// <param name="item"></param>
         private void OnExcuteActionAfterAnimation(Vector3 mousePosition, ItemDetails item)
         {
-            Debug.Log($"OnExcuteActionAfterAnimation, mousePosition = {mousePosition}, item = {item.ItemName}");
+            // Debug.Log($"OnExcuteActionAfterAnimation, mousePosition = {mousePosition}, item = {item.ItemName}");
             var mouseGridPos = _currentGrid.WorldToCell(mousePosition);
             var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
 
@@ -126,28 +129,6 @@ namespace Farm.Map
             }
         }
 
-        /// <summary>
-        /// 检测是否有农作物被点击
-        /// </summary>
-        /// <param name="mouseWorldPosition"></param>
-        /// <returns></returns>
-        public Crop GetCropObject(Vector3 mouseWorldPosition)
-        {
-            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
-            Crop currentCrop = null;
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].GetComponent<Crop>())
-                {
-                    currentCrop = colliders[i].GetComponent<Crop>();
-                    break;
-                }
-            }
-
-            return currentCrop;
-        }
-
         private void OnGameDayEvent(int day, Seasons season)
         {
             _currentSeason = season;
@@ -180,7 +161,62 @@ namespace Farm.Map
             RefreshMap();
         }
 
+        /// <summary>
+        /// 检测是否有农作物被点击
+        /// </summary>
+        /// <param name="mouseWorldPosition"></param>
+        /// <returns></returns>
+        public Crop GetCropObject(Vector3 mouseWorldPosition)
+        {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
+            Crop currentCrop = null;
 
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].GetComponent<Crop>())
+                {
+                    currentCrop = colliders[i].GetComponent<Crop>();
+                    break;
+                }
+            }
+
+            return currentCrop;
+        }
+
+        /// <summary>
+        /// 判断工具使用范围内是否有碰撞体
+        /// </summary>
+        /// <param name="tool"></param>
+        /// <returns></returns>
+        public bool HaveReapableItemsInRadius(ItemDetails tool)
+        {
+            _itemsInRadius = new List<ReapItem>();
+
+            Collider2D[] colliders = new Collider2D[20];
+
+            Physics2D.OverlapCircle(Input.mousePosition, tool.ItemUseRadius, new ContactFilter2D(), colliders);
+
+            if (colliders.Length > 0)
+            {
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (colliders[i] != null)
+                    {
+                        if (colliders[i].GetComponent<ReapItem>())
+                        {
+                            _itemsInRadius.Add(colliders[i].GetComponent<ReapItem>());
+                        }
+                    }
+                }
+            }
+
+            return _itemsInRadius.Count > 0;
+        }
+
+        /// <summary>
+        /// 初始化地图瓦片信息, 使用字典存储
+        /// </summary>
+        /// <param name="mapInformation">地图瓦片信息</param>
         private void InitTileDetailDictionary(MapDataSO mapInformation)
         {
             foreach (TileProperty tileProperty in mapInformation.TileProperties)
@@ -248,7 +284,6 @@ namespace Farm.Map
             }
             return null;
         }
-
 
         /// <summary>
         /// 设置挖地的瓦片
@@ -338,7 +373,6 @@ namespace Farm.Map
 
             DisplayMap(SceneManager.GetActiveScene().name);
         }
-
     }
 }
 

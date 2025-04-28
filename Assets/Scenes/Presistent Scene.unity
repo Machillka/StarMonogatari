@@ -370,6 +370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolPrefabs:
   - {fileID: 8212348588511505747, guid: 584bf6ccb7392ff42be3c80c04841cae, type: 3}
+  - {fileID: 2276164916282747912, guid: 0ef2abc780c37d441be82cdc728ed0da, type: 3}
+  - {fileID: 2276164916282747912, guid: 9dc6ca9e2b5185147bb4619eb51bde93, type: 3}
 --- !u!4 &618296655
 Transform:
   m_ObjectHideFlags: 0
@@ -1805,6 +1807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapDataList:
   - {fileID: 11400000, guid: 1ad8fa319b87bed4d92177d501a69a88, type: 2}
+  - {fileID: 11400000, guid: 21645e89be9d0d640a6aa4ccbc6ec139, type: 2}
   WaterTile: {fileID: 11400000, guid: 176221b2cb905d14aa69d1932ab64c9a, type: 2}
   DigTile: {fileID: 11400000, guid: de72f1808cc1e6b4489de2947228f0a5, type: 2}
 --- !u!1 &1999366807

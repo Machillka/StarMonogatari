@@ -107,6 +107,9 @@ namespace Farm.CropPlant
             crop.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;          // BUG[x]: 没有生成对应的图片
             crop.GetComponent<Crop>().CropInformation = cropInformation;
             crop.GetComponent<Crop>().tileDetails = tileInformation;                    // TODO:写一个赋值方法
+
+            // Debug.Log("Display Crop Plant");
+            // Debug.Log($"Crop ID is {crop.GetComponent<Crop>().CropInformation.SeedItemID}");
         }
     }
 }

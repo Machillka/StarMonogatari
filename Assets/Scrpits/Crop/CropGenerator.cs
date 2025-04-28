@@ -30,12 +30,13 @@ namespace Farm.CropPlant
 
             if (seedItemID != 0)
             {
+                // Debug.Log("Generate in CropGenerator, Seed ID = " + seedItemID);
                 TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(cropGridPos);
 
                 tile ??= new TileDetails();
 
                 tile.daySinceWatered = -1;
-                tile.growthDays = seedItemID;
+                tile.seedItemID = seedItemID;
                 tile.growthDays = growthDays;
 
                 GridMapManager.Instance.UpdateTileDetails(tile);

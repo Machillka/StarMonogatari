@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1480536194336509476}
   - component: {fileID: 2579683586802700364}
   m_Layer: 0
-  m_Name: LeafFalling 01
+  m_Name: Leaf Falling 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8212348588511505747}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.69, y: 14.11, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

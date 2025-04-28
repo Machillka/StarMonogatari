@@ -32,18 +32,9 @@ public class PoolManager : MonoBehaviour
 
             var newPool = new ObjectPool<GameObject>(
                 () => Instantiate(prefab, parent),
-                e =>
-                {
-                    e.SetActive(true);
-                },
-                e =>
-                {
-                    e.SetActive(false);
-                },
-                e =>
-                {
-                    Destroy(e);
-                }
+                e => { e.SetActive(true); },
+                e => { e.SetActive(false); },
+                e => { Destroy(e); }
             );
 
             _poolEffectList.Add(newPool);
@@ -56,11 +47,17 @@ public class PoolManager : MonoBehaviour
         var objectPool = effectType switch
         {
             ParticalEffetcTypes.LeaveFalling01 => _poolEffectList[0],
-            ParticalEffetcTypes.LeaveFalling02 => _poolEffectList[1],
-            ParticalEffetcTypes.Rock => _poolEffectList[2],
-            ParticalEffetcTypes.ReapableScenery => _poolEffectList[3],
+            // ParticalEffetcTypes.LeaveFalling02 => _poolEffectList[1],
+            ParticalEffetcTypes.Rock => _poolEffectList[1],
+            ParticalEffetcTypes.ReapableScenery => _poolEffectList[2],
             _ => null
         };
+
+        if (objectPool == null)
+        {
+            Debug.LogError($"没有找到 {effectType} 的对象池");
+            return;
+        }
 
         GameObject effect = objectPool.Get();
 

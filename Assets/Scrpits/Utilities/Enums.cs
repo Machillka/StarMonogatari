@@ -17,7 +17,7 @@ public enum InventoryLocation
 
 public enum PlayerHoldPartTypes
 {
-    None, Carry, Hoe, Break, Collect, Water, Chop
+    None, Carry, Hoe, Break, Collect, Water, Chop, Reap
 }
 
 public enum PlayerBodyParts

@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using Farm.CropPlant;
 
 namespace Farm.Inventory
 {
     public class Item : MonoBehaviour
     {
         public int ItemID;
-        public ItemDetails ItemDetails { get => _itemDetails;}
+        public ItemDetails ItemDetails { get => _itemDetails; }
 
         private SpriteRenderer _spriteRenderer;
         private BoxCollider2D _collider2D;
@@ -51,6 +52,12 @@ namespace Farm.Inventory
             else
             {
                 Debug.LogError($"Item with ID {ItemID} not found.");
+            }
+
+            if (_itemDetails.ItemType == ItemType.ReapableScenery)
+            {
+                gameObject.AddComponent<ReapItem>();
+                gameObject.GetComponent<ReapItem>().InitCropData(ItemID);
             }
         }
     }
