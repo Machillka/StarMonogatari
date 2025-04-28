@@ -107,6 +107,7 @@ public class CursorManager : MonoBehaviour
             ItemType.WaterTool => Tool,
             ItemType.CollectTool => Tool,
             ItemType.BreakTool => Tool,
+            ItemType.ReapTool => Tool,
             ItemType.Seed => Seed,
             ItemType.Commodity => Item,
             _ => Normal
@@ -139,13 +140,14 @@ public class CursorManager : MonoBehaviour
             return;
         }
 
-
         TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPos);
-
+        // Debug.Log($"CurrentTileInformation:{currentTile}");
+        //TODO: 比如杂草等不应只能在有 "Tile" 的地方使用 -> //FIXME修改属性
         if (currentTile != null)
         {
             CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
             Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
+            // Debug.Log($"Switching ItemType; itemtype = {_currentItem.ItemType}");
             //WORKFLOW 补齐所有物品判断
             switch (_currentItem.ItemType)
             {
@@ -189,6 +191,12 @@ public class CursorManager : MonoBehaviour
                         else
                             SetCursorInValid();
                     }
+                    else
+                        SetCursorInValid();
+                    break;
+                case ItemType.ReapTool:
+                    if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, _currentItem))
+                        SetCursorValid();
                     else
                         SetCursorInValid();
                     break;

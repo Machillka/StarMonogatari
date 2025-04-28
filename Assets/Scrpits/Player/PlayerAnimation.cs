@@ -146,6 +146,7 @@ public class PlayerAnimation : MonoBehaviour
             ItemType.WaterTool => PlayerHoldPartTypes.Water,
             ItemType.ChopTool => PlayerHoldPartTypes.Chop,
             ItemType.BreakTool => PlayerHoldPartTypes.Break,
+            ItemType.ReapTool => PlayerHoldPartTypes.Reap,          //FIXME 镰刀有举起的动画
             _ => PlayerHoldPartTypes.None
         };
         if (isSelected == false)

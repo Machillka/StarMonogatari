@@ -27,6 +27,8 @@ namespace Farm.Map
 
         private List<ReapItem> _itemsInRadius;
 
+        private Vector3 _mouseInWorldPosition;
+
         private void Start()
         {
             //TODO: 利用addressable加载地图数据 或者其他动态加载的方式
@@ -61,7 +63,7 @@ namespace Farm.Map
 
             if (_isFirstLoadScene[SceneManager.GetActiveScene().name])
             {
-                Debug.Log("Generating Crops");
+                // Debug.Log("Generating Crops");
                 EventHandler.CallGenerateCropEvent();
                 _isFirstLoadScene[SceneManager.GetActiveScene().name] = false;
             }
@@ -121,6 +123,20 @@ namespace Farm.Map
                         if (currentCrop != null)
                         {
                             currentCrop?.ProcessToolAction(item, currentCrop.tileDetails);
+                        }
+                        break;
+                    case ItemType.ReapTool:
+                        int reapCount = 0;
+                        for (int i = 0; i < _itemsInRadius.Count; i++)
+                        {
+                            EventHandler.CallParticalEffectEvent(ParticalEffetcTypes.ReapableScenery, _itemsInRadius[i].transform.position);
+                            _itemsInRadius[i].SpawnHarvestItems();
+                            Destroy(_itemsInRadius[i].gameObject);
+                            reapCount++;
+                            if (reapCount >= Settings.reapAmount)
+                            {
+                                break;
+                            }
                         }
                         break;
                 }
@@ -184,27 +200,32 @@ namespace Farm.Map
         }
 
         /// <summary>
-        /// 判断工具使用范围内是否有碰撞体
+        /// 判断工具使用范围内是否有 grass 的碰撞体
         /// </summary>
         /// <param name="tool"></param>
         /// <returns></returns>
-        public bool HaveReapableItemsInRadius(ItemDetails tool)
+        public bool HaveReapableItemsInRadius(Vector3 mouseInWorldPosition, ItemDetails tool)
         {
+            _mouseInWorldPosition = mouseInWorldPosition;
             _itemsInRadius = new List<ReapItem>();
 
             Collider2D[] colliders = new Collider2D[20];
 
-            Physics2D.OverlapCircle(Input.mousePosition, tool.ItemUseRadius, new ContactFilter2D(), colliders);
-
+            //NOTE 有毒 多读文档
+            ContactFilter2D contactFilter = new ContactFilter2D().NoFilter();
+            int colliderCount = Physics2D.OverlapCircle(mouseInWorldPosition, tool.ItemUseRadius, contactFilter, colliders);
+            Debug.Log($"Collider Count: {colliderCount}");
             if (colliders.Length > 0)
             {
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     if (colliders[i] != null)
                     {
-                        if (colliders[i].GetComponent<ReapItem>())
+                        var crop = colliders[i].GetComponent<ReapItem>();
+                        if (crop != null)
                         {
-                            _itemsInRadius.Add(colliders[i].GetComponent<ReapItem>());
+                            Debug.Log("Found Reapable Item");
+                            _itemsInRadius.Add(crop);
                         }
                     }
                 }
@@ -373,6 +394,14 @@ namespace Farm.Map
 
             DisplayMap(SceneManager.GetActiveScene().name);
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_mouseInWorldPosition, 1);
+        }
+#endif
     }
 }
 

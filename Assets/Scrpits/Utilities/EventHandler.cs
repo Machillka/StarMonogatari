@@ -28,7 +28,7 @@ public class EventHandler
     public static UnityAction<ItemDetails, bool> ItemSelectedEvent;
     public static void CallItemSelectedEvent(ItemDetails item, bool isSelected)
     {
-        // Debug.Log($"ItemSelectedEvent, item = {item.ItemName}, isSelected = {isSelected}");
+        Debug.Log($"ItemSelectedEvent, item = {item.ItemName}, isSelected = {isSelected}, itemType = {item.ItemType}");
         ItemSelectedEvent?.Invoke(item, isSelected);
     }
 

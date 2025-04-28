@@ -187,7 +187,7 @@ MonoBehaviour:
   - SeedItemID: 1033
     GrowthDays: 00000000
     GrowthStagePrefab:
-    - {fileID: 3952177021273111767, guid: f0038b1e7c198c94fb4a70594c8b7b45, type: 3}
+    - {fileID: 3952177021273111767, guid: 3f13e421071077f4ea9c5120bfe9fb22, type: 3}
     GrowthStageSprites:
     - {fileID: 21300000, guid: 9ae5a331348064d73aa91a952b9e1a41, type: 3}
     Seasons: 00000000010000000200000003000000

@@ -16,7 +16,7 @@ namespace Farm.CropPlant
         /// <summary>
         /// 生成收获的物品
         /// </summary>
-        private void SpawnHarvestItems()
+        public void SpawnHarvestItems()
         {
             for (int i = 0; i < _cropDetails.ProducedItemID.Length; i++)
             {
@@ -38,7 +38,7 @@ namespace Farm.CropPlant
                         // Debug.Log("Spawn at Player Position");
                         EventHandler.CallHarvestAtPlaterPositionEvent(_cropDetails.ProducedItemID[i]);
                     }
-                    else        // TODO: 世界地图生成
+                    else
                     {
                         var dirX = transform.position.x > _playerTransform.position.x ? 1 : -1;
                         // 随机生成物品的坐标

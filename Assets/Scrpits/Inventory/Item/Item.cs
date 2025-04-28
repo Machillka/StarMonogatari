@@ -58,6 +58,8 @@ namespace Farm.Inventory
             {
                 gameObject.AddComponent<ReapItem>();
                 gameObject.GetComponent<ReapItem>().InitCropData(ItemID);
+
+                gameObject.AddComponent<ItemInteractive>();
             }
         }
     }

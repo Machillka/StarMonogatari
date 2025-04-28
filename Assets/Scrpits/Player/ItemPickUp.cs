@@ -13,9 +13,11 @@ namespace Farm.Inventory
             if (item == null)
                 return;
 
+
             if (item.ItemDetails != null)
             {
-                InventoryManager.Instance.AddItem(item, true);
+                if(item.ItemDetails.CanPickedup)
+                    InventoryManager.Instance.AddItem(item, true);
             }
         }
     }
