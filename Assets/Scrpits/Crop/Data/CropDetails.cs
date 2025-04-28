@@ -48,6 +48,10 @@ public class CropDetails
     public bool IsHadAnimation;
     public bool IsHadParticalEffect;
 
+    public ParticalEffetcTypes effectType;
+
+    public Vector3 particalEffectPos;
+
     public bool CheckToolAvaliable(int toolID)
     {
         if (HarvestToolItemID.Length == 0)

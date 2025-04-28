@@ -40,3 +40,12 @@ public enum GridTypes
     PlaceFurniture,
     NPCObstacle
 }
+
+public enum ParticalEffetcTypes
+{
+    None,
+    LeaveFalling01,
+    LeaveFalling02,
+    Rock,
+    ReapableScenery,
+}

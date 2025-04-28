@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 public class EventHandler
 {
     public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
@@ -107,5 +108,11 @@ public class EventHandler
     public static void CallOnSelectSlotEvent(InputAction.CallbackContext context)
     {
         SelectSlotEvent?.Invoke(context);
+    }
+
+    public static event Action<ParticalEffetcTypes, Vector3> ParticalEffectEvent;
+    public static void CallParticalEffectEvent(ParticalEffetcTypes type, Vector3 pos)
+    {
+        ParticalEffectEvent?.Invoke(type, pos);
     }
 }

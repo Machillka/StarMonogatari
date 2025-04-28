@@ -40,6 +40,8 @@ MonoBehaviour:
     GenerateAtPlayerPosition: 1
     IsHadAnimation: 0
     IsHadParticalEffect: 0
+    effectType: 0
+    particalEffectPos: {x: 0, y: 0, z: 0}
   - SeedItemID: 1006
     GrowthDays: 0100000002000000020000000300000003000000
     GrowthStagePrefab:
@@ -67,8 +69,10 @@ MonoBehaviour:
     GenerateAtPlayerPosition: 1
     IsHadAnimation: 0
     IsHadParticalEffect: 0
+    effectType: 0
+    particalEffectPos: {x: 0, y: 0, z: 0}
   - SeedItemID: 1026
-    GrowthDays: 0200000002000000020000000200000002000000
+    GrowthDays: 0100000001000000010000000100000001000000
     GrowthStagePrefab:
     - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
     - {fileID: 7426718844823180131, guid: df703ac2e975f604893518c206bd8c03, type: 3}
@@ -83,48 +87,37 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e12c6f18fb50544fea7f5245a9a2aeff, type: 3}
     Seasons: 0000000001000000
     HarvestToolItemID: e9030000
-    RequireActionCount: 05000000
+    RequireActionCount: 03000000
     transferItemID: 1027
     ProducedItemID: 02040000ff030000
     ProduceMinAmount: 0200000003000000
     ProduceMaxAmount: 0300000005000000
-    SpawnRadius: {x: 0, y: 0}
+    SpawnRadius: {x: 2.5, y: 1.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    GenerateAtPlayerPosition: 0
+    IsHadAnimation: 1
+    IsHadParticalEffect: 1
+    effectType: 1
+    particalEffectPos: {x: 0, y: 2.5, z: 0}
+  - SeedItemID: 1027
+    GrowthDays: 01000000
+    GrowthStagePrefab:
+    - {fileID: 4381006769085443854, guid: c97ac75f977450a48af543cbda0b4cda, type: 3}
+    GrowthStageSprites:
+    - {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: e9030000
+    RequireActionCount: 03000000
+    transferItemID: -1
+    ProducedItemID: ff030000
+    ProduceMinAmount: 02000000
+    ProduceMaxAmount: 03000000
+    SpawnRadius: {x: 1.5, y: 1}
     DaysToRegrow: 0
     RegrowTimes: 0
     GenerateAtPlayerPosition: 0
     IsHadAnimation: 0
     IsHadParticalEffect: 0
-  - SeedItemID: 0
-    GrowthDays: 
-    GrowthStagePrefab: []
-    GrowthStageSprites: []
-    Seasons: 
-    HarvestToolItemID: 
-    RequireActionCount: 
-    transferItemID: 0
-    ProducedItemID: 
-    ProduceMinAmount: 
-    ProduceMaxAmount: 
-    SpawnRadius: {x: 0, y: 0}
-    DaysToRegrow: 0
-    RegrowTimes: 0
-    GenerateAtPlayerPosition: 0
-    IsHadAnimation: 0
-    IsHadParticalEffect: 0
-  - SeedItemID: 0
-    GrowthDays: 
-    GrowthStagePrefab: []
-    GrowthStageSprites: []
-    Seasons: 
-    HarvestToolItemID: 
-    RequireActionCount: 
-    transferItemID: 0
-    ProducedItemID: 
-    ProduceMinAmount: 
-    ProduceMaxAmount: 
-    SpawnRadius: {x: 0, y: 0}
-    DaysToRegrow: 0
-    RegrowTimes: 0
-    GenerateAtPlayerPosition: 0
-    IsHadAnimation: 0
-    IsHadParticalEffect: 0
+    effectType: 0
+    particalEffectPos: {x: 0, y: 0, z: 0}

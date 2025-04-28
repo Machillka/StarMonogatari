@@ -14,6 +14,8 @@ public class Crop : MonoBehaviour
 
     public bool CanHarvest => tileDetails != null && tileDetails.growthDays >= CropInformation.TotalGrouthDays;
 
+    // public Vector3 particalEffectPosition => transform.position + new Vector3(0, 0.5f, 0);
+
     private void Awake()
     {
         InitCrop();
@@ -54,6 +56,8 @@ public class Crop : MonoBehaviour
             }
 
             // TODO: 判断特效
+            if (CropInformation.IsHadParticalEffect)
+                EventHandler.CallParticalEffectEvent(CropInformation.effectType, transform.position + CropInformation.particalEffectPos);
         }
 
         if (_harvestActionCount >= requireActionCount)

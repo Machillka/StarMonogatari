@@ -44,8 +44,8 @@ public class InputManager : Singleton<InputManager>
 
     private void OnSelectSlotEvent(InputAction.CallbackContext context)
     {
-        if (int.TryParse(context.control.name, out int index))
-            Debug.Log($"按下的按键为{index}");
+        // if (int.TryParse(context.control.name, out int index))
+            // Debug.Log($"按下的按键为{index}");
         EventHandler.CallOnSelectSlotEvent(context);
     }
 
