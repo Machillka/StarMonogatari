@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : Singleton<TimeManager>
 {
     private int _gameSecond;
     private int _gameMinute;
@@ -15,6 +16,8 @@ public class TimeManager : MonoBehaviour
     public bool IsGameClockPause;
 
     private float _tikTime;
+
+    public TimeSpan GameTime => new TimeSpan(_gameHour, _gameMinute, _gameSecond);
 
     private void Update()
     {
@@ -40,8 +43,9 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitNewGameTime();
     }
 

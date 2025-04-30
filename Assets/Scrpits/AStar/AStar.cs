@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Farm.Astar
 {
-    public class AStar : MonoBehaviour
+    public class AStar : Singleton<AStar>
     {
         private GridNodeManager _gridNodes;
         private Node _startNode;

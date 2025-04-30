@@ -97,3 +97,11 @@ public class TileDetails
 
     public GridTypes Itemtype;
 }
+
+[System.Serializable]
+public class NPCPosition
+{
+    public Transform npcTransform;
+    public string startSceneName;
+    public Vector3 position;
+}

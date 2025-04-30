@@ -19,4 +19,7 @@ public class Settings
     public const float sceneFadeDuration = 0.5f;
 
     public const int reapAmount = 3;                                // 一次收获的数量 //TODO: 设计成一个随机范围
+
+    public const float gridCellSize = 1f;
+    public const float gridCellDiagonalSize = 1.41f;
 }
