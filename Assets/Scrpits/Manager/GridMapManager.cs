@@ -395,6 +395,34 @@ namespace Farm.Map
             DisplayMap(SceneManager.GetActiveScene().name);
         }
 
+        /// <summary>
+        /// 通过场景名字获得场景的网格星系, 输出原点和范围
+        /// </summary>
+        /// <param name="sceneName">场景名字</param>
+        /// <param name="gridDimensions">网格范围</param>
+        /// <param name="gridOrigin">网格原点</param>
+        /// <returns></returns>
+        public bool GetGridDimensions(string sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin)
+        {
+            gridDimensions = Vector2Int.zero;
+            gridOrigin = Vector2Int.zero;
+
+            foreach (var mapInformation in MapDataList)
+            {
+                if (mapInformation.SceneName == sceneName)
+                {
+                    gridDimensions.x = mapInformation.gridWidth;
+                    gridDimensions.y = mapInformation.gridHeight;
+                    gridOrigin.x = mapInformation.originX;
+                    gridOrigin.y = mapInformation.originY;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
