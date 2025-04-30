@@ -147,14 +147,26 @@ namespace Farm.Astar
             else
                 return false;
 
-            _startNode = _gridNodes.GetGridNode(startPos.x, startPos.y);
-            _targetNode = _gridNodes.GetGridNode(targetPos.x, targetPos.y);
+            _startNode = _gridNodes.GetGridNode(startPos.x - _originX, startPos.y - _originY);
+            _targetNode = _gridNodes.GetGridNode(targetPos.x - _originX, targetPos.y - _originY);
 
             for (int x = 0; x < _gridWidth; x++)
             {
                 for (int y = 0; y < _gridHeight; y++)
                 {
-                    var key = (x + _originX) + "," + (y + _originY) + scaneName;
+                    // var key = (x + _originX) + "x" + (y + _originY) + "y" +scaneName;
+                    Vector3Int tilePos = new Vector3Int(x + _originX, y + _originY, 0);
+                    TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(tilePos);
+
+                    if (tile != null)
+                    {
+                        Node node = _gridNodes.GetGridNode(x, y);
+
+                        if (tile.IsNPCObstacle)
+                        {
+                            node.isObstacle = true;
+                        }
+                    }
                 }
             }
 

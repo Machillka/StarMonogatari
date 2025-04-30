@@ -957,8 +957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d301f0c22886273449ee07a2000f73ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0}
-  targetPos: {x: 0, y: 0}
+  startPos: {x: -13, y: -39}
+  targetPos: {x: 13, y: -26}
   displayMap: {fileID: 785842427}
   displayTile: {fileID: 11400000, guid: b9407c44b2f51d3438f43a3ca2d7dceb, type: 2}
   isDisplayStartAndTarget: 0

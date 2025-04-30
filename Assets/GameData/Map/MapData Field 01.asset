@@ -6392,3 +6392,7 @@ MonoBehaviour:
   - TileCoordinate: {x: 25, y: 12}
     TileType: 1
     BoolTypeValue: 1
+  gridWidth: 50
+  gridHeight: 61
+  originX: -25
+  originY: -49

@@ -7,6 +7,8 @@ public class MapDataSO : ScriptableObject
     [SceneName] public string SceneName;
     public List<TileProperty> TileProperties;
 
+    //TODO 尝试使用代码自动获取这些变量
+    //WORKFLOW 创建新地图填充以下字段
     public int gridWidth;
     public int gridHeight;
 

@@ -29,6 +29,12 @@ namespace Farm.Astar
             }
         }
 
+        /// <summary>
+        /// 通过坐标得到网格的 node 信息
+        /// </summary>
+        /// <param name="xPos"></param>
+        /// <param name="yPos"></param>
+        /// <returns>当前坐标 node 信息的引用</returns>
         public Node GetGridNode(int xPos, int yPos)
         {
             if (xPos < _width && yPos < _height)
