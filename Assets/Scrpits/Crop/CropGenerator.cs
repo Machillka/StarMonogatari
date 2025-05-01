@@ -33,7 +33,13 @@ namespace Farm.CropPlant
                 // Debug.Log("Generate in CropGenerator, Seed ID = " + seedItemID);
                 TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(cropGridPos);
 
-                tile ??= new TileDetails();
+                // tile ??= new TileDetails();
+                if (tile == null)
+                {
+                    tile = new TileDetails();
+                    tile.GridX = cropGridPos.x;
+                    tile.GridY = cropGridPos.y;
+                }
 
                 tile.daySinceWatered = -1;
                 tile.seedItemID = seedItemID;

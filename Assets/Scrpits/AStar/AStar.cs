@@ -154,10 +154,9 @@ namespace Farm.Astar
             {
                 for (int y = 0; y < _gridHeight; y++)
                 {
-                    // var key = (x + _originX) + "x" + (y + _originY) + "y" +scaneName;
+                    var key = (x + _originX) + "x" + (y + _originY) + "y" +scaneName;
                     Vector3Int tilePos = new Vector3Int(x + _originX, y + _originY, 0);
-                    TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(tilePos);
-
+                    TileDetails tile = GridMapManager.Instance.GetTileDetails(key);
                     if (tile != null)
                     {
                         Node node = _gridNodes.GetGridNode(x, y);

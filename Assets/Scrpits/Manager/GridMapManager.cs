@@ -282,7 +282,7 @@ namespace Farm.Map
             }
         }
 
-        private TileDetails GetTileDetails(string key)
+        public TileDetails GetTileDetails(string key)
         {
             if (itemDetailsDict.ContainsKey(key))
             {

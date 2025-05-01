@@ -10,8 +10,9 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Animator))]
 public class NPCMovementController : MonoBehaviour
 {
+    //TODO: 跨场景移动
     public ScheduleDataListSO schduleData;
-    private SortedSet<ScheduleDataListSO> _scheduleSet;
+    private SortedSet<ScheduleDetails> _scheduleSet;
     private ScheduleDetails _currentSchedule;
 
     public string _currentSceneName;
@@ -29,7 +30,7 @@ public class NPCMovementController : MonoBehaviour
     private float _maxSpeed = 3f;
     private Vector2 _direction;
     private Grid _grid;
-    public bool isMoveing;
+    public bool isMoving;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
@@ -39,9 +40,16 @@ public class NPCMovementController : MonoBehaviour
     private Stack<MovementStep> _movementSteps;
 
     private bool _isInitialized;
-
     private bool _isNPCMove;
     private bool _isSceneLoaded;
+
+    private AnimationClip _stopAnimationClip;
+    public AnimationClip _blankAnimationClip;
+    private AnimatorOverrideController _animOverride;
+
+    // 动画计时器
+    private float _animationBreakTime;
+    private bool _canPlayStopAnimation;
 
     private TimeSpan GameTime => TimeManager.Instance.GameTime;
 
@@ -51,7 +59,17 @@ public class NPCMovementController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _coll = GetComponent<BoxCollider2D>();
         _anim = GetComponent<Animator>();
+
         _movementSteps = new Stack<MovementStep>();
+        _scheduleSet = new SortedSet<ScheduleDetails>();
+
+        _animOverride = new AnimatorOverrideController(_anim.runtimeAnimatorController);
+        _anim.runtimeAnimatorController = _animOverride;
+
+        foreach (var schedule in schduleData.schduleList)
+        {
+            _scheduleSet.Add(schedule);
+        }
     }
 
     #region enable and disable
@@ -59,15 +77,28 @@ public class NPCMovementController : MonoBehaviour
     {
         EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+        EventHandler.GameMinuteEvent += OnGameMinuteEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+        EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
     }
+
     #endregion
 
+    private void Update()
+    {
+        if (_isSceneLoaded)
+        {
+            SwitchAnimation();
+        }
+
+        _animationBreakTime -= Time.deltaTime;
+        _canPlayStopAnimation = _animationBreakTime <= 0f;
+    }
 
     private void FixedUpdate()
     {
@@ -93,6 +124,29 @@ public class NPCMovementController : MonoBehaviour
         _isSceneLoaded = true;
     }
 
+    //todo: 添加日期和季节的判断
+    private void OnGameMinuteEvent(int minute, int hour)
+    {
+        //TODO: 设置具有随机性以及 daily routine
+        int time = (hour * 100) + minute;
+        ScheduleDetails matchedSchedule = null;
+        foreach (var schedule in _scheduleSet)
+        {
+            if (schedule.Time == time)
+            {
+                matchedSchedule = schedule;
+            }
+            else if (schedule.Time > time)
+            {
+                break;
+            }
+        }
+
+        if (matchedSchedule != null)
+        {
+            BuildPath(matchedSchedule);
+        }
+    }
     private void CheckVisiable()
     {
         if (_currentSceneName == SceneManager.GetActiveScene().name)
@@ -122,6 +176,10 @@ public class NPCMovementController : MonoBehaviour
                 TimeSpan stepTime = new TimeSpan(step.hour, step.minute, step.second);
 
                 MoveToGridPosition(_nextGridPosition, stepTime);
+            }
+            else if (!isMoving && _canPlayStopAnimation)
+            {
+                StartCoroutine(SetStopAnimation());
             }
         }
     }
@@ -177,6 +235,8 @@ public class NPCMovementController : MonoBehaviour
     {
         _movementSteps.Clear();
         _currentSchedule = schedule;
+        _targetGridPosition = (Vector3Int)schedule.targetGridPosition;
+        _stopAnimationClip = schedule.stopClip;
 
         if (schedule.targetScene == _currentSceneName)
         {
@@ -241,6 +301,43 @@ public class NPCMovementController : MonoBehaviour
     {
         Vector3 worldPos = _grid.CellToWorld(gridPos);
         return new Vector3(worldPos.x + Settings.gridCellSize / 2f, worldPos.y + Settings.gridCellSize / 2f);
+    }
+
+    private void SwitchAnimation()
+    {
+        isMoving = transform.position != GetWorldPosition(_targetGridPosition);
+        _anim.SetBool("IsMoving", isMoving);
+
+        if (isMoving)
+        {
+            _anim.SetBool("IsExit", true);
+            _anim.SetFloat("DirX", _direction.x);
+            _anim.SetFloat("DirY", _direction.y);
+        }
+        else
+        {
+            _anim.SetBool("IsExit", false);
+        }
+    }
+
+    private IEnumerator SetStopAnimation()
+    {
+        _anim.SetFloat("DirX", 0);
+        _anim.SetFloat("DirY", -1);
+
+        _animationBreakTime = Settings.animationBreakTime;
+        if (_stopAnimationClip != null)
+        {
+            _animOverride[_blankAnimationClip] = _stopAnimationClip;
+            _anim.SetBool("IsEventAnimation", true);
+            yield return null;
+            _anim.SetBool("IsEventAnimation", false);
+        }
+        else
+        {
+            _animOverride[_stopAnimationClip] = _blankAnimationClip;
+            _anim.SetBool("IsEventAnimation", false);
+        }
     }
 
     #region 设置显示状态
