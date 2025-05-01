@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Farm.Dialog;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Video;
 public class EventHandler
 {
     public static event Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
@@ -28,7 +28,7 @@ public class EventHandler
     public static UnityAction<ItemDetails, bool> ItemSelectedEvent;
     public static void CallItemSelectedEvent(ItemDetails item, bool isSelected)
     {
-        Debug.Log($"ItemSelectedEvent, item = {item.ItemName}, isSelected = {isSelected}, itemType = {item.ItemType}");
+        // Debug.Log($"ItemSelectedEvent, item = {item.ItemName}, isSelected = {isSelected}, itemType = {item.ItemType}");
         ItemSelectedEvent?.Invoke(item, isSelected);
     }
 
@@ -121,5 +121,11 @@ public class EventHandler
     public static void CallGenerateCropEvent()
     {
         GenerateCropEvent?.Invoke();
+    }
+
+    public static event Action<DialogPiece> ShowDialogEvent;
+    public static void CallShowDialogEvent(DialogPiece dialogPiece)
+    {
+        ShowDialogEvent?.Invoke(dialogPiece);
     }
 }

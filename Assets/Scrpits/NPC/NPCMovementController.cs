@@ -23,6 +23,7 @@ public class NPCMovementController : MonoBehaviour
     private Vector3 _nextWorldPositon;
 
     public string StartScene { set => _currentSceneName = value; }
+    public bool isInteractable;
 
     [Header("Movement")]
     public float normalSpeed = 2f;
@@ -237,6 +238,7 @@ public class NPCMovementController : MonoBehaviour
         _currentSchedule = schedule;
         _targetGridPosition = (Vector3Int)schedule.targetGridPosition;
         _stopAnimationClip = schedule.stopClip;
+        isInteractable = schedule.isInteractable;
 
         if (schedule.targetScene == _currentSceneName)
         {
