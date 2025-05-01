@@ -22,4 +22,5 @@ public class Settings
 
     public const float gridCellSize = 1f;
     public const float gridCellDiagonalSize = 1.41f;
+    public const float pixelSize = 0.05f;                           // 20 * 20 的格子占 1 个 unit 的 0.05
 }

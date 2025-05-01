@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c73f2dc53e6fe4fad5c2916b467b8f, type: 3}
   m_Name: Mayor Schdule
   m_EditorClassIdentifier: 
-  schduleList: []
+  schduleList:
+  - hour: 8
+    minute: 0
+    day: 0
+    season: 0
+    priority: 0
+    targetScene: Field 01
+    targetGridPosition: {x: -13, y: 5}
+    stopClip: {fileID: 7400000, guid: db32c3897ab64466f86a8993b8e48f9e, type: 2}
+    isInteractable: 0

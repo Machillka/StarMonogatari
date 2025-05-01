@@ -18,6 +18,13 @@ namespace Farm.Astar
         public bool isDisplayPath;
         private Stack<MovementStep> npcMovementStepStack = new Stack<MovementStep>();
 
+        [Header("TestNPCMovement")]
+        public NPCMovementController npcMovement;
+        public bool moveNPC;
+        [SceneName] public string targetScene;
+        public Vector2Int targetPosNPC;
+        public AnimationClip stopClip;
+
         private void Awake()
         {
             _aStar = GetComponent<AStar>();
@@ -26,6 +33,13 @@ namespace Farm.Astar
         private void Update()
         {
             ShowPathOnGridMap();
+
+            if (moveNPC)
+            {
+                moveNPC = false;
+                var schedule = new ScheduleDetails(0, 0, 0, Seasons.Spring, 0, targetScene, targetPosNPC, stopClip, true);
+                npcMovement.BuildPath(schedule);
+            }
         }
 
         private void ShowPathOnGridMap()
