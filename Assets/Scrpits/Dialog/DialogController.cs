@@ -51,7 +51,7 @@ namespace Farm.Dialog
         private void FillDialogStack()
         {
             _dialogStack = new Stack<DialogPiece>();
-            for (int i = dialogList.Count - 1; i > 0; i--)
+            for (int i = dialogList.Count - 1; i >= 0; i--)
             {
                 dialogList[i].isDone = false;
                 _dialogStack.Push(dialogList[i]);
@@ -64,6 +64,7 @@ namespace Farm.Dialog
 
             if (_dialogStack.TryPop(out DialogPiece piece))
             {
+                // Debug.Log(piece.dialogText);
                 EventHandler.CallShowDialogEvent(piece);
                 yield return new WaitUntil(() => piece.isDone);
             }
@@ -73,6 +74,7 @@ namespace Farm.Dialog
                 FillDialogStack();
                 onFinishEvent?.Invoke();
             }
+
             _isTalking = false;
         }
     }
