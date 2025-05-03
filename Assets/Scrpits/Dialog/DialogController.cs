@@ -14,7 +14,8 @@ namespace Farm.Dialog
         public UnityEvent onFinishEvent;
 
         public List<DialogPiece> dialogList;
-        private Stack<DialogPiece> _dialogStack; //FIXME 所以为什么不用队列来写
+        // private Stack<DialogPiece> _dialogStack; //TODO[x] 所以为什么不用队列来写
+        private Queue<DialogPiece> _dialogQueue;
 
         private bool _canTalk;
         private bool _isTalking;
@@ -50,21 +51,20 @@ namespace Farm.Dialog
 
         private void FillDialogStack()
         {
-            _dialogStack = new Stack<DialogPiece>();
-            for (int i = dialogList.Count - 1; i >= 0; i--)
+            _dialogQueue = new Queue<DialogPiece>();
+
+            for (int i = 0; i < dialogList.Count; i++)
             {
                 dialogList[i].isDone = false;
-                _dialogStack.Push(dialogList[i]);
+                _dialogQueue.Enqueue(dialogList[i]);
             }
         }
 
         private IEnumerator DialogRoutine()
         {
             _isTalking = true;
-
-            if (_dialogStack.TryPop(out DialogPiece piece))
+            if (_dialogQueue.TryDequeue(out DialogPiece piece))
             {
-                // Debug.Log(piece.dialogText);
                 EventHandler.CallShowDialogEvent(piece);
                 yield return new WaitUntil(() => piece.isDone);
             }
@@ -74,7 +74,6 @@ namespace Farm.Dialog
                 FillDialogStack();
                 onFinishEvent?.Invoke();
             }
-
             _isTalking = false;
         }
     }
