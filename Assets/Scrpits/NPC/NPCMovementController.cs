@@ -23,7 +23,7 @@ public class NPCMovementController : MonoBehaviour
     private Vector3 _nextWorldPositon;
 
     public string StartScene { set => _currentSceneName = value; }
-    public bool isInteractable;
+    public bool isInteractable;         //NOTE: 定义的时候直接赋值没用？？？
 
     [Header("Movement")]
     public float normalSpeed = 2f;
@@ -43,6 +43,7 @@ public class NPCMovementController : MonoBehaviour
     private bool _isInitialized;
     private bool _isNPCMove;
     private bool _isSceneLoaded;
+    private bool _isFirstLoaded;
 
     private AnimationClip _stopAnimationClip;
     public AnimationClip _blankAnimationClip;
@@ -56,6 +57,8 @@ public class NPCMovementController : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"Before Awake Function, Interactable = {isInteractable}");
+        isInteractable = true;
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _coll = GetComponent<BoxCollider2D>();
@@ -92,6 +95,7 @@ public class NPCMovementController : MonoBehaviour
 
     private void Update()
     {
+        // Debug.Log($"Interact!!!     {isInteractable}");
         if (_isSceneLoaded)
         {
             SwitchAnimation();
@@ -122,10 +126,17 @@ public class NPCMovementController : MonoBehaviour
             InitNPC();
             _isInitialized = true;
         }
+
         _isSceneLoaded = true;
+
+        // if (!_isFirstLoaded)
+        // {
+        //     _currentGridPosition = _grid.WorldToCell(transform.position);
+        //     var schedule = new ScheduleDetails(0, 0, 0, )
+        // }
     }
 
-    //todo: 添加日期和季节的判断
+    //TODO: 添加日期和季节的判断
     private void OnGameMinuteEvent(int minute, int hour)
     {
         //TODO: 设置具有随机性以及 daily routine
@@ -230,6 +241,8 @@ public class NPCMovementController : MonoBehaviour
             _currentGridPosition.y + Settings.gridCellSize / 2f,
             0
         );
+
+        _targetGridPosition = _currentGridPosition;
     }
 
     public void BuildPath(ScheduleDetails schedule)
@@ -238,8 +251,9 @@ public class NPCMovementController : MonoBehaviour
         _currentSchedule = schedule;
         _targetGridPosition = (Vector3Int)schedule.targetGridPosition;
         _stopAnimationClip = schedule.stopClip;
-        isInteractable = schedule.isInteractable;
-
+        // isInteractable = schedule.isInteractable;
+        //FIXME 思考：日常是否可处于互动状态， Schedule 可以拓展到不是单纯的行走路径而已
+        isInteractable = true;
         if (schedule.targetScene == _currentSceneName)
         {
             AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)_currentGridPosition, schedule.targetGridPosition, _movementSteps);

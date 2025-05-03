@@ -13,7 +13,7 @@ namespace Farm.Dialog
         private GameObject _UISigh;
         public UnityEvent onFinishEvent;
 
-        public List<DialogPiece> dialogList = new List<DialogPiece>();
+        public List<DialogPiece> dialogList;
         private Stack<DialogPiece> _dialogStack; //FIXME 所以为什么不用队列来写
 
         private bool _canTalk;
@@ -51,7 +51,7 @@ namespace Farm.Dialog
         private void FillDialogStack()
         {
             _dialogStack = new Stack<DialogPiece>();
-            for (int i = dialogList.Count; i > 0; i--)
+            for (int i = dialogList.Count - 1; i > 0; i--)
             {
                 dialogList[i].isDone = false;
                 _dialogStack.Push(dialogList[i]);

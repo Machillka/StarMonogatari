@@ -15,7 +15,7 @@ namespace Farm.Dialog
 
         private void Awake()
         {
-            tipsBox.SetActive(false);
+            dialogueBox.SetActive(false);
         }
 
         private void OnEnable()
