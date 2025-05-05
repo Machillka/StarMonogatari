@@ -66,7 +66,7 @@ namespace Farm.Dialog
                     nameLeft.gameObject.SetActive(false);
                     nameRight.gameObject.SetActive(false);
                 }
-                yield return StartCoroutine(TypeText(piece.dialogText, 1f));
+                yield return StartCoroutine(TypeText(piece.dialogText, 0.5f));
 
                 piece.isDone = true;
 

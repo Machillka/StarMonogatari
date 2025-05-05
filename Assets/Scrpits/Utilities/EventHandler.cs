@@ -128,4 +128,28 @@ public class EventHandler
     {
         ShowDialogEvent?.Invoke(dialogPiece);
     }
+
+    public static event Action<SlotTypes, InventoryBagSO> BaseBagOpenEvent;
+    public static void CallBaseBagOpenEvent(SlotTypes slotType, InventoryBagSO bag)
+    {
+        BaseBagOpenEvent?.Invoke(slotType, bag);
+    }
+
+    public static event Action<SlotTypes, InventoryBagSO> BaseBagCloseEvent;
+    public static void CallBaseBagCloseEvent(SlotTypes slotType, InventoryBagSO bag)
+    {
+        BaseBagCloseEvent?.Invoke(slotType, bag);
+    }
+
+    public static event Action<GameStates> UpdateGameStateEvent;
+    public static void CallUpdateGameStateEvent(GameStates gameState)
+    {
+        UpdateGameStateEvent?.Invoke(gameState);
+    }
+
+    public static event Action<ItemDetails, bool> ShowTradeUIEvent;
+    public static void CallShowTradeUIEvent(ItemDetails item, bool isSell)
+    {
+        ShowTradeUIEvent?.Invoke(item, isSell);
+    }
 }

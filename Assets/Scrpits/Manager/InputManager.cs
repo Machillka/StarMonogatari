@@ -12,6 +12,7 @@ public class InputManager : Singleton<InputManager>
     public bool IsShiftTimeButtonPressed => _inputController.Player.TimeShift.WasPressedThisFrame();
     public bool IsShiftTimeButtonPressing => _inputController.Player.TimeShift.IsPressed();
     public bool IsSpaceButtonPressed => _inputController.Player.DialogEnter.WasPressedThisFrame();
+    public bool IsExitShopButtonPressed => _inputController.Player.ExitShop.WasPressedThisFrame();
     public bool IsLeftMouseButtonPressed;
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
@@ -33,6 +34,7 @@ public class InputManager : Singleton<InputManager>
         _inputController.ActionBar.SelectSlot.performed += OnSelectSlotEvent;
         EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+        EventHandler.UpdateGameStateEvent += OnUpdateGameStateEvent;
     }
 
     private void OnDisable()
@@ -41,13 +43,25 @@ public class InputManager : Singleton<InputManager>
         _inputController.ActionBar.SelectSlot.performed -= OnSelectSlotEvent;
         EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+        EventHandler.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+    }
+
+    private void OnUpdateGameStateEvent(GameStates gameState)
+    {
+        IsDisabledInput = gameState switch
+        {
+            GameStates.GamePlay => false,
+            GameStates.Pause => true,
+            _ => false
+        };
     }
 
     private void OnSelectSlotEvent(InputAction.CallbackContext context)
     {
         // if (int.TryParse(context.control.name, out int index))
-            // Debug.Log($"按下的按键为{index}");
-        EventHandler.CallOnSelectSlotEvent(context);
+        // Debug.Log($"按下的按键为{index}");
+        if (!IsDisabledInput)
+            EventHandler.CallOnSelectSlotEvent(context);
     }
 
     private void OnAfterSceneLoadedEvent()

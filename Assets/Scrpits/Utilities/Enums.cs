@@ -49,3 +49,9 @@ public enum ParticalEffetcTypes
     Rock,
     ReapableScenery,
 }
+
+public enum GameStates
+{
+    GamePlay,
+    Pause,
+}

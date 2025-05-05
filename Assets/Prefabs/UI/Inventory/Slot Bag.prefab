@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 9110790683464784974}
   - component: {fileID: 270217973451784104}
   m_Layer: 0
-  m_Name: SlotBag
+  m_Name: Slot Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

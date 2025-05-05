@@ -30,4 +30,4 @@ MonoBehaviour:
     targetScene: Field 01
     targetGridPosition: {x: 13, y: -19}
     stopClip: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
-    isInteractable: 0
+    isInteractable: 1

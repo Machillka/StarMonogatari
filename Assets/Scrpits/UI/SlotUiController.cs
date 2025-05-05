@@ -139,30 +139,41 @@ namespace Farm.Inventory
 
                 var targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUiController>();
                 int targetSlotIndex = targetSlot.SlotIndex;
-
+                // Debug.Log($"Current Type: {SlotType} Target Type: {targetSlot.SlotType}");
                 // 在底栏和背包中进行交换
                 if (SlotType == SlotTypes.Bag && targetSlot.SlotType == SlotTypes.Bag)
                 {
                     InventoryManager.Instance.SwapPlayerBagItem(SlotIndex, targetSlotIndex);
                 }
-            }
-            else
-            {
-                if (SlotItem.CanDropped)
+                else if (SlotType == SlotTypes.Shop && targetSlot.SlotType == SlotTypes.Bag)        // 买东西
                 {
-                    var pos = Camera.main.ScreenToWorldPoint(
-                    new Vector3(
-                            Input.mousePosition.x,
-                            Input.mousePosition.y,
-                            -Camera.main.transform.position.z
-                        )
-                    );
-
-                    EventHandler.CallInstantiateItemInScene(SlotItem.ItemID, pos);
+                    EventHandler.CallShowTradeUIEvent(SlotItem, false);
                 }
-            }
+                else if (SlotType == SlotTypes.Bag && targetSlot.SlotType == SlotTypes.Shop)        // 卖
+                {
+                    EventHandler.CallShowTradeUIEvent(SlotItem, true);
+                }
 
-            //TODO: 移动后的物体，依旧可以点按出现高亮 -> 数据没有清除
+                // 清空高亮
+                _inventoryUI.UpdateSlotHighlight(-1);
+            }
+            // else
+            // {
+            //     if (SlotItem.CanDropped)
+            //     {
+            //         var pos = Camera.main.ScreenToWorldPoint(
+            //         new Vector3(
+            //                 Input.mousePosition.x,
+            //                 Input.mousePosition.y,
+            //                 -Camera.main.transform.position.z
+            //             )
+            //         );
+
+            //         EventHandler.CallInstantiateItemInScene(SlotItem.ItemID, pos);
+            //     }
+            // }
+
+            //TODO[x]: 移动后的物体，依旧可以点按出现高亮 -> 数据没有清除
             _inventoryUI.UpdateSlotHighlight(-1);
         }
 

@@ -66,13 +66,20 @@ namespace Farm.Dialog
             if (_dialogQueue.TryDequeue(out DialogPiece piece))
             {
                 EventHandler.CallShowDialogEvent(piece);
+                EventHandler.CallUpdateGameStateEvent(GameStates.Pause);
                 yield return new WaitUntil(() => piece.isDone);
             }
             else
             {
                 EventHandler.CallShowDialogEvent(null);
+                EventHandler.CallUpdateGameStateEvent(GameStates.GamePlay);
                 FillDialogStack();
-                onFinishEvent?.Invoke();
+
+                if (onFinishEvent != null)
+                {
+                    onFinishEvent.Invoke();
+                    _canTalk = false;
+                }
             }
             _isTalking = false;
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 namespace Farm.Inventory
 {
@@ -18,6 +19,14 @@ namespace Farm.Inventory
 
         private bool _isBagOpening;
 
+        [Header("通用背包")]
+        [SerializeField] private GameObject baseBag;
+        public GameObject shopSlotPrefab;
+        [SerializeField] private List<SlotUiController> baseBagSlots;
+
+        [Header("交易UI")]
+        public TradeUIController tradeUI;
+
         private void Start()
         {
             for (int i = 0; i < PlayerSlots.Length; i++)
@@ -32,12 +41,78 @@ namespace Farm.Inventory
         {
             EventHandler.UpdateInventoryUI += UpdateInventoryUI;
             EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
+            EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventHandler.BaseBagCloseEvent += OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUIEvent += OnShowTradeUIEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= UpdateInventoryUI;
             EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
+            EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventHandler.BaseBagCloseEvent -= OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUIEvent += OnShowTradeUIEvent;
+        }
+
+        private void OnBaseBagOpenEvent(SlotTypes slotType, InventoryBagSO bagData)
+        {
+            //TODO 添加箱子内容
+            GameObject prefab = slotType switch
+            {
+                SlotTypes.Shop => shopSlotPrefab,
+                _ => null
+            };
+
+            // 生成内容
+            baseBag.SetActive(true);
+            Debug.Log(baseBag);
+            baseBagSlots = new List<SlotUiController>();
+            for (int i = 0; i < bagData.InventoryItemList.Count; i++)
+            {
+                var slot = Instantiate(prefab, baseBag.transform.GetChild(0)).GetComponent<SlotUiController>();
+                slot.SlotIndex = i;
+                baseBagSlots.Add(slot);
+            }
+
+            if (slotType == SlotTypes.Shop)
+            {
+                // 显示玩家背包
+                _bagUI.GetComponent<RectTransform>().pivot = new Vector2(-1, 0.5f);
+                _bagUI.SetActive(true);
+                _isBagOpening = true;
+            }
+
+            // 更新UI
+                LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
+            UpdateInventoryUI(InventoryLocation.Box, bagData.InventoryItemList);
+        }
+
+        private void OnBaseBagCloseEvent(SlotTypes slotType, InventoryBagSO bagData)
+        {
+            baseBag.SetActive(false);
+            ItemToolTip.gameObject.SetActive(false);
+            UpdateSlotHighlight(-1);
+
+            foreach (var slot in baseBagSlots)
+            {
+                Destroy(slot.gameObject);
+            }
+            baseBagSlots.Clear();
+
+            if (slotType == SlotTypes.Shop)
+            {
+                // 关闭玩家背包
+                _bagUI.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+                _bagUI.SetActive(false);
+                _isBagOpening = false;
+            }
+        }
+
+        private void OnShowTradeUIEvent(ItemDetails item, bool isSell)
+        {
+            tradeUI.gameObject.SetActive(true);
+            tradeUI.SetupTradeUI(item, isSell);
         }
 
         private void OnBeforeSceneLoadedEvent()
@@ -64,6 +139,18 @@ namespace Farm.Inventory
                     }
                     break;
                 case InventoryLocation.Box:
+                    for (int i = 0; i < baseBagSlots.Count; i++)
+                    {
+                        if (items[i].ItemAmount > 0)
+                        {
+                            var item = InventoryManager.Instance.GetItemDetails(items[i].ItemID);
+                            baseBagSlots[i].UpdateSlot(item, items[i].ItemAmount);
+                        }
+                        else
+                        {
+                            baseBagSlots[i].EmptySlot();
+                        }
+                    }
                     break;
             }
         }
