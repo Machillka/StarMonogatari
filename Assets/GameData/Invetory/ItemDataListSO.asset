@@ -71,8 +71,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 30
+    SellPercentage: 0.5
   - ItemID: 1006
     ItemName: "\u84DD\u8393\u79CD\u5B50"
     ItemType: 0
@@ -83,8 +83,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 20
+    SellPercentage: 0.8
   - ItemID: 1007
     ItemName: "\u8304\u5B50"
     ItemType: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 50
+    SellPercentage: 0.7
   - ItemID: 1008
     ItemName: "\u8461\u8404"
     ItemType: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 60
+    SellPercentage: 0.4
   - ItemID: 1009
     ItemName: "\u7EA2\u841D\u535C"
     ItemType: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 20
+    SellPercentage: 0.1
   - ItemID: 1010
     ItemName: "\u7EA2\u8FA3\u6912"
     ItemType: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 100
+    SellPercentage: 1
   - ItemID: 1011
     ItemName: "\u5357\u74DC"
     ItemType: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 50
+    SellPercentage: 0.4
   - ItemID: 1012
     ItemName: "\u756A\u8304"
     ItemType: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 100
+    SellPercentage: 0.2
   - ItemID: 1013
     ItemName: "\u829C\u83C1"
     ItemType: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
     CanPickedup: 1
     CanDropped: 0
     CanCarried: 1
-    ItemPrice: 0
-    SellPercentage: 0
+    ItemPrice: 10
+    SellPercentage: 0.1
   - ItemID: 1014
     ItemName: "\u571F\u8C46"
     ItemType: 1

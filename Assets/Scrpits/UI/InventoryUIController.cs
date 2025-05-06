@@ -1,9 +1,8 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+using TMPro;
 
 namespace Farm.Inventory
 {
@@ -26,6 +25,7 @@ namespace Farm.Inventory
 
         [Header("交易UI")]
         public TradeUIController tradeUI;
+        public TextMeshProUGUI playerCurrencyText;
 
         private void Start()
         {
@@ -35,6 +35,7 @@ namespace Farm.Inventory
             }
 
             _isBagOpening = _bagUI.activeInHierarchy;
+            playerCurrencyText.text = InventoryManager.Instance.playerCurrency.ToString();
         }
 
         private void OnEnable()
@@ -84,7 +85,7 @@ namespace Farm.Inventory
             }
 
             // 更新UI
-                LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
             UpdateInventoryUI(InventoryLocation.Box, bagData.InventoryItemList);
         }
 
@@ -153,6 +154,7 @@ namespace Farm.Inventory
                     }
                     break;
             }
+            playerCurrencyText.text = InventoryManager.Instance.playerCurrency.ToString();
         }
 
         /// <summary>

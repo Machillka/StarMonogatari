@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Farm.Inventory
@@ -9,6 +8,9 @@ namespace Farm.Inventory
         public ItemDataListSO itemDataListSO;
         [Header("Inventory Data")]
         public InventoryBagSO playerBag;
+
+        [Header("Currency")]
+        public int playerCurrency;
 
         private void Start()
         {
@@ -206,6 +208,41 @@ namespace Farm.Inventory
             {
                 // TODO: 商品数量不够逻辑
             }
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+        }
+
+        /// <summary>
+        /// 交易物品
+        /// </summary>
+        /// <param name="item">交易物品种类</param>
+        /// <param name="amount">交易数量</param>
+        /// <param name="isSellTrade">标记是否购买</param>
+        public void TradeItem(ItemDetails item, int amount, bool isSellTrade)
+        {
+            int cost = item.ItemPrice * amount;
+            int index = GetItemIndexInBag(item.ItemID);
+
+            if (isSellTrade)            // 卖出商品
+            {
+                if (playerBag.InventoryItemList[index].ItemAmount >= amount)
+                {
+                    RemoveItem(item.ItemID, amount);
+                    cost = (int)(cost * item.SellPercentage);
+                    playerCurrency += cost;
+                }
+            }
+            else
+            {
+                if (playerCurrency - cost >= 0)
+                {
+                    if (CheckBagCapcity())
+                    {
+                        AddItemAtIndex(item.ItemID, index, amount);
+                    }
+                    playerCurrency -= cost;
+                }
+            }
+            //TODO 人物动画问题 —— 选中物品的动画没有取消
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
         }
     }
