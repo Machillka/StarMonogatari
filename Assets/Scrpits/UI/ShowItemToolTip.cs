@@ -49,6 +49,15 @@ namespace Farm.Inventory
                     // 设置显示位置
                     _inventoryUI.ItemToolTip.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0f);
                     _inventoryUI.ItemToolTip.transform.position = transform.position + Vector3.up * Settings.ToolTipOffset;
+
+                    // 默认关闭蓝图提示 UI
+                    _inventoryUI.ItemToolTip.ResourcePanel.SetActive(false);
+
+                    if (_slotUI.SlotItem.ItemType == ItemType.Furniture)
+                    {
+                        _inventoryUI.ItemToolTip.ResourcePanel.SetActive(true);
+                        _inventoryUI.ItemToolTip.SetupResourcePanel(_slotUI.SlotItem.ItemID);
+                    }
                 }
             }
         }

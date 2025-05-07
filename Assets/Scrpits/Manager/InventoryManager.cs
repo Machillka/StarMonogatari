@@ -8,6 +8,8 @@ namespace Farm.Inventory
         public ItemDataListSO itemDataListSO;
         [Header("Inventory Data")]
         public InventoryBagSO playerBag;
+        [Header("Blueprint Data")]
+        public BluePrintDataListSO bluePrintData;
 
         [Header("Currency")]
         public int playerCurrency;
