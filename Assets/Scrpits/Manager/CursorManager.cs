@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Farm.Map;
 using Farm.CropPlant;
+using Unity.VisualScripting;
+using System.Runtime.InteropServices;
+using Farm.Inventory;
 
 public class CursorManager : MonoBehaviour
 {
@@ -10,6 +13,8 @@ public class CursorManager : MonoBehaviour
     private Sprite _currentSprite;
     private Image _cursorImage;
     private RectTransform _cursorCanvas;
+
+    private Image _buildImage;
 
     // 鼠标检测
     private Camera mainCamera;
@@ -29,6 +34,8 @@ public class CursorManager : MonoBehaviour
     {
         _cursorCanvas = GameObject.FindWithTag("CursorCanvas").GetComponent<RectTransform>();
         _cursorImage = _cursorCanvas.GetChild(0).GetComponent<Image>();
+        _buildImage = _cursorCanvas.GetChild(1).GetComponent<Image>();
+        _buildImage.gameObject.SetActive(false);
 
         _currentSprite = Normal;
         SetCursorImage(_currentSprite);
@@ -51,6 +58,7 @@ public class CursorManager : MonoBehaviour
         else
         {
             SetCursorImage(Normal);
+            _buildImage.gameObject.SetActive(false);
         }
     }
 
@@ -80,12 +88,14 @@ public class CursorManager : MonoBehaviour
     {
         _isCursorPositionValid = true;
         _cursorImage.color = new Color(1, 1, 1, 1);
+        _buildImage.color = new Color(1, 1, 1, 0.5f);
     }
 
     private void SetCursorInValid()
     {
         _isCursorPositionValid = false;
         _cursorImage.color = new Color(1, 0, 0, 0.4f);
+        _buildImage.color = new Color(1, 0, 0, 0.5f);
     }
 
     private void OnItemSelectedEvent(ItemDetails itemInformation, bool isSelected)
@@ -95,6 +105,7 @@ public class CursorManager : MonoBehaviour
             _currentItem = null;
             isCursorEnabled = false;
             _currentSprite = Normal;
+            _buildImage.gameObject.SetActive(false);
             return;
         }
 
@@ -113,6 +124,13 @@ public class CursorManager : MonoBehaviour
             _ => Normal
         };
         isCursorEnabled = true;
+
+        if (itemInformation.ItemType == ItemType.Furniture)
+        {
+            _buildImage.gameObject.SetActive(true);
+            _buildImage.sprite = itemInformation.ItemOnWorldSprite;
+            _buildImage.SetNativeSize();
+        }
     }
 
     #endregion
@@ -131,6 +149,9 @@ public class CursorManager : MonoBehaviour
         mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
         // Debug.Log(mouseWorldPos);
         mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
+
+        // Build Image followes mouse position
+        _buildImage.rectTransform.position = Input.mousePosition;
 
         // 判断使用范围内
         Vector3Int playerGridPos = currentGrid.WorldToCell(_playerTransform.position);
@@ -196,6 +217,12 @@ public class CursorManager : MonoBehaviour
                     break;
                 case ItemType.ReapTool:
                     if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, _currentItem))
+                        SetCursorValid();
+                    else
+                        SetCursorInValid();
+                    break;
+                case ItemType.Furniture:
+                    if (currentTile.CanPlaceFurniture && InventoryManager.Instance.CheckStock(_currentItem.ItemID))
                         SetCursorValid();
                     else
                         SetCursorInValid();

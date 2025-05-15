@@ -12,6 +12,7 @@ namespace Farm.Inventory
         private Transform _playerTransform => FindAnyObjectByType<PlayerMovement>().transform;
 
         private Dictionary<string, List<SceneItem>> _sceneItemDictionary = new Dictionary<string, List<SceneItem>>();
+        private Dictionary<string, List<FurnitureItem>> _sceneFurnitureDictionary = new Dictionary<string, List<FurnitureItem>>();
 
         private void OnEnable()
         {
@@ -19,6 +20,7 @@ namespace Farm.Inventory
             EventHandler.DropItemInScene += OnDropItemInScene;
             EventHandler.BeforeSceneLoadedEvent += OnBeforeSceneLoadedEvent;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
         }
 
         private void OnDisable()
@@ -27,6 +29,13 @@ namespace Farm.Inventory
             EventHandler.DropItemInScene -= OnDropItemInScene;
             EventHandler.BeforeSceneLoadedEvent -= OnBeforeSceneLoadedEvent;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+        }
+
+        private void OnBuildFurnitureEvent(int itemID, Vector3 position)
+        {
+            BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(itemID);
+            var bluePrintItem = Instantiate(bluePrint.buildPrefab, position, Quaternion.identity, _itemParentTransform);
         }
 
         private void OnBeforeSceneLoadedEvent()
@@ -91,6 +100,52 @@ namespace Farm.Inventory
             {
                 // 没找到就添加
                 _sceneItemDictionary.Add(SceneManager.GetActiveScene().name, currentSceneItems);
+            }
+        }
+
+        /// <summary>
+        /// 获得场景中所有家具
+        /// </summary>
+        private void GetAllSceneFurnitures()
+        {
+            List<FurnitureItem> currentSceneFurnitures = new List<FurnitureItem>();
+
+            foreach (var item in FindObjectsByType<Item>(FindObjectsSortMode.None))
+            {
+                FurnitureItem sceneItem = new()
+                {
+                    ItemID = item.ItemID,
+                    Position = new SerializableVector3(item.transform.position)
+                };
+
+                currentSceneFurnitures.Add(sceneItem);
+            }
+
+            if (_sceneFurnitureDictionary.ContainsKey(SceneManager.GetActiveScene().name))
+            {
+                // 找到就更新
+                _sceneFurnitureDictionary[SceneManager.GetActiveScene().name] = currentSceneFurnitures;
+            }
+            else
+            {
+                // 没找到就添加
+                _sceneFurnitureDictionary.Add(SceneManager.GetActiveScene().name, currentSceneFurnitures);
+            }
+        }
+
+        private void RebuildFurniture()
+        {
+            List<FurnitureItem> currentSceneFurnitures = new List<FurnitureItem>();
+
+            if (_sceneFurnitureDictionary.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFurnitures))
+            {
+                if (currentSceneFurnitures.Count > 0)
+                {
+                    foreach (var furnitureItem in currentSceneFurnitures)
+                    {
+                        OnBuildFurnitureEvent(furnitureItem.ItemID, furnitureItem.Position.ToVector3());
+                    }
+                }
             }
         }
 

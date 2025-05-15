@@ -23,12 +23,26 @@ namespace Farm.Inventory
         {
             EventHandler.DropItemInScene += OnDropItemInScene;
             EventHandler.HarvestAtPlaterPositionEvent += OnHarvestAtPlaterPositionEvent;
+            EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.DropItemInScene -= OnDropItemInScene;
             EventHandler.HarvestAtPlaterPositionEvent -= OnHarvestAtPlaterPositionEvent;
+            EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+        }
+
+        private void OnBuildFurnitureEvent(int itemID, Vector3 position)
+        {
+            RemoveItem(itemID, 1);
+            BluePrintDetails bluePrint = bluePrintData.GetBluePrintDetails(itemID);
+
+            foreach (var resourceItem in bluePrint.resourceItems)
+            {
+                RemoveItem(resourceItem.ItemID, resourceItem.ItemAmount);
+            }
+
         }
 
         private void OnHarvestAtPlaterPositionEvent(int itemID)
@@ -75,7 +89,7 @@ namespace Farm.Inventory
             //TODO: 优化逻辑
         }
 
-         public void AddItem(int itemID)
+        public void AddItem(int itemID)
         {
             var indexInBag = GetItemIndexInBag(itemID);
             // Debug.Log($"Index:{indexInBag}");
@@ -246,6 +260,29 @@ namespace Farm.Inventory
             }
             //TODO 人物动画问题 —— 选中物品的动画没有取消
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.InventoryItemList);
+        }
+
+        /// <summary>
+        /// 检查物品库存是否符合建造数量
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns></returns>
+        public bool CheckStock(int itemID)
+        {
+            var bluePrintInformation = bluePrintData.GetBluePrintDetails(itemID);
+
+            foreach (var resourceItem in bluePrintInformation.resourceItems)
+            {
+                var itemStock = playerBag.GetInventoryItem(resourceItem.ItemID);
+                if (itemStock.ItemAmount >= resourceItem.ItemAmount)
+                {
+                    continue;
+                }
+                else
+                    return false;
+            }
+
+            return true;
         }
     }
 }

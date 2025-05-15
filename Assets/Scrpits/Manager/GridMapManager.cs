@@ -139,6 +139,13 @@ namespace Farm.Map
                             }
                         }
                         break;
+                    case ItemType.Furniture:
+                        // 生成物品
+                        // 保存地图
+                        // 销毁图纸
+                        // 销毁建筑用材
+                        EventHandler.CallBuildFurnitureEvent(item.ItemID, _mouseInWorldPosition);
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
