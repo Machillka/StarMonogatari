@@ -20,6 +20,19 @@ namespace Farm.Inventory
         public int ItemAmount;
         public int SlotIndex;
 
+        public InventoryLocation Localtion
+        {
+            get
+            {
+                return SlotType switch
+                {
+                    SlotTypes.Box => InventoryLocation.Box,
+                    SlotTypes.Bag => InventoryLocation.Player,
+                    _ => InventoryLocation.Player                   // TODO: Set default InventoryLocation null
+                };
+            }
+        }
+
         // public InventoryUIController InventoryUI => _inventoryUI;
         private InventoryUIController _inventoryUI => GetComponentInParent<InventoryUIController>();
 
@@ -153,9 +166,12 @@ namespace Farm.Inventory
                 {
                     EventHandler.CallShowTradeUIEvent(SlotItem, true);
                 }
-
+                else if (SlotType != SlotTypes.Shop && targetSlot.SlotType != SlotTypes.Shop && SlotType != targetSlot.SlotType)
+                {
+                    InventoryManager.Instance.SwapItem(Localtion, SlotIndex, targetSlot.Localtion, targetSlot.SlotIndex);
+                }
                 // 清空高亮
-                _inventoryUI.UpdateSlotHighlight(-1);
+                    _inventoryUI.UpdateSlotHighlight(-1);
             }
             // else
             // {

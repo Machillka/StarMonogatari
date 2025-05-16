@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Farm.Inventory
@@ -8,6 +9,8 @@ namespace Farm.Inventory
         public ItemDataListSO itemDataListSO;
         [Header("Inventory Data")]
         public InventoryBagSO playerBag;
+        private InventoryBagSO currentBoxBag;
+
         [Header("Blueprint Data")]
         public BluePrintDataListSO bluePrintData;
 
@@ -24,6 +27,7 @@ namespace Farm.Inventory
             EventHandler.DropItemInScene += OnDropItemInScene;
             EventHandler.HarvestAtPlaterPositionEvent += OnHarvestAtPlaterPositionEvent;
             EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
+            EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
         }
 
         private void OnDisable()
@@ -31,6 +35,12 @@ namespace Farm.Inventory
             EventHandler.DropItemInScene -= OnDropItemInScene;
             EventHandler.HarvestAtPlaterPositionEvent -= OnHarvestAtPlaterPositionEvent;
             EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+            EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
+        }
+
+        private void OnBaseBagOpenEvent(SlotTypes slotType, InventoryBagSO bagData)
+        {
+            currentBoxBag = bagData;
         }
 
         private void OnBuildFurnitureEvent(int itemID, Vector3 position)
@@ -198,6 +208,50 @@ namespace Farm.Inventory
         }
 
         /// <summary>
+        /// swap item datas between two different bags
+        /// </summary>
+        /// <param name="locationFrom"></param>
+        /// <param name="fromIndex"></param>
+        /// <param name="locationTarget"></param>
+        /// <param name="targetIndex"></param>
+        public void SwapItem(InventoryLocation locationFrom, int fromIndex, InventoryLocation locationTarget, int targetIndex)
+        {
+            var currentList = GetItemList(locationFrom);
+            var targetList = GetItemList(locationTarget);
+
+            InventoryItem currentItem = currentList[fromIndex];
+
+            if (targetIndex < targetList.Count)
+            {
+                InventoryItem targetItem = targetList[targetIndex];
+
+                // Drag two different items
+                if (targetItem.ItemID != 0 && currentItem.ItemID != targetItem.ItemID)
+                {
+                    currentList[fromIndex] = targetItem;
+                    targetList[targetIndex] = currentItem;
+                }
+                // two same items
+                else if (currentItem.ItemID == targetItem.ItemID)
+                {
+                    targetItem.ItemAmount += currentItem.ItemAmount;
+                    currentList[fromIndex] = new InventoryItem();
+                    targetList[targetIndex] = targetItem;
+                }
+                // target is a empty slot   //TODO: Combine case 1 and case 3
+                else
+                {
+                    targetList[targetIndex] = currentItem;
+                    currentList[fromIndex] = new InventoryItem();
+                }
+
+                EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
+                EventHandler.CallUpdateInventoryUI(locationTarget, targetList);
+
+            }
+        }
+
+        /// <summary>
         /// 移出指定数量的玩家背包内的物品
         /// </summary>
         /// <param name="itemID"></param>
@@ -284,6 +338,21 @@ namespace Farm.Inventory
                     return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// 根据位置返回对应背包的数据列表的引用
+        /// </summary>
+        /// <param name="localtion"></param>
+        /// <returns></returns>
+        private List<InventoryItem> GetItemList(InventoryLocation location)
+        {
+            return location switch
+            {
+                InventoryLocation.Player => playerBag.InventoryItemList,
+                InventoryLocation.Box => currentBoxBag.InventoryItemList,
+                _ => null
+            };
         }
     }
 }
