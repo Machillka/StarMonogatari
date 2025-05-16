@@ -41,12 +41,14 @@ namespace Farm.Inventory
         private void OnBeforeSceneLoadedEvent()
         {
             GetAllSceneItems();
+            GetAllSceneFurnitures();
         }
 
         private void OnAfterSceneLoadedEvent()
         {
             _itemParentTransform = GameObject.FindWithTag("ItemParent").transform;
             RecreateAllItems();
+            RebuildFurniture();
         }
 
         private void OnInstantiateItemInScene(int itemID, Vector3 pos)

@@ -22,6 +22,7 @@ namespace Farm.Inventory
         [SerializeField] private GameObject baseBag;
         public GameObject shopSlotPrefab;
         [SerializeField] private List<SlotUiController> baseBagSlots;
+        public GameObject boxSlotPrefab;
 
         [Header("交易UI")]
         public TradeUIController tradeUI;
@@ -62,12 +63,13 @@ namespace Farm.Inventory
             GameObject prefab = slotType switch
             {
                 SlotTypes.Shop => shopSlotPrefab,
+                SlotTypes.Box => boxSlotPrefab,
                 _ => null
             };
 
             // 生成内容
             baseBag.SetActive(true);
-            Debug.Log(baseBag);
+            // Debug.Log(baseBag);
             baseBagSlots = new List<SlotUiController>();
             for (int i = 0; i < bagData.InventoryItemList.Count; i++)
             {

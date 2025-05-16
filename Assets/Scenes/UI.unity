@@ -3704,6 +3704,7 @@ MonoBehaviour:
   baseBag: {fileID: 526797143}
   shopSlotPrefab: {fileID: 8682486424570362739, guid: f55efed4f98ca844798e1f197054e400, type: 3}
   baseBagSlots: []
+  boxSlotPrefab: {fileID: 8682486424570362739, guid: 5f2e0901f289d3e498e056a9ebb939f9, type: 3}
   tradeUI: {fileID: 555269286}
   playerCurrencyText: {fileID: 940417687}
 --- !u!1 &526797143

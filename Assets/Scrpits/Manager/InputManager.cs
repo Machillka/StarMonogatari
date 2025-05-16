@@ -13,6 +13,7 @@ public class InputManager : Singleton<InputManager>
     public bool IsShiftTimeButtonPressing => _inputController.Player.TimeShift.IsPressed();
     public bool IsSpaceButtonPressed => _inputController.Player.DialogEnter.WasPressedThisFrame();
     public bool IsExitShopButtonPressed => _inputController.Player.ExitShop.WasPressedThisFrame();
+    public bool IsOpenBagButtonPressed => _inputController.Player.OpenBag.WasCompletedThisFrame();
     public bool IsLeftMouseButtonPressed;
 
     public UnityAction<Vector2> OnMoveInput;                                 // 移动事件
