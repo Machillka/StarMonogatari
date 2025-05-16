@@ -273,7 +273,9 @@ namespace Farm.Inventory
 
             foreach (var resourceItem in bluePrintInformation.resourceItems)
             {
+                // Debug.Log($"Resource ItemID = {resourceItem.ItemID}, Need = {resourceItem.ItemAmount}");
                 var itemStock = playerBag.GetInventoryItem(resourceItem.ItemID);
+                // Debug.Log($"Bag Item ID = {itemStock.ItemID}, Bag Item Amout = {itemStock.ItemAmount}");
                 if (itemStock.ItemAmount >= resourceItem.ItemAmount)
                 {
                     continue;
@@ -281,7 +283,6 @@ namespace Farm.Inventory
                 else
                     return false;
             }
-
             return true;
         }
     }

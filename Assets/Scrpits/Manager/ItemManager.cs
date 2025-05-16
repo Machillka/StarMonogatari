@@ -36,6 +36,7 @@ namespace Farm.Inventory
         {
             BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(itemID);
             var bluePrintItem = Instantiate(bluePrint.buildPrefab, position, Quaternion.identity, _itemParentTransform);
+            Debug.Log(bluePrintItem);
         }
 
         private void OnBeforeSceneLoadedEvent()

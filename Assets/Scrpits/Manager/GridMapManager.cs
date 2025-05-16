@@ -75,7 +75,7 @@ namespace Farm.Map
         /// <summary>
         /// 执行实际效果
         /// </summary>
-        /// <param name="mousePosition"></param>
+        /// <param name="mousePosition">鼠标的世界坐标</param>
         /// <param name="item"></param>
         private void OnExcuteActionAfterAnimation(Vector3 mousePosition, ItemDetails item)
         {
@@ -144,7 +144,7 @@ namespace Farm.Map
                         // 保存地图
                         // 销毁图纸
                         // 销毁建筑用材
-                        EventHandler.CallBuildFurnitureEvent(item.ItemID, _mouseInWorldPosition);
+                        EventHandler.CallBuildFurnitureEvent(item.ItemID, mousePosition);
                         break;
                 }
 

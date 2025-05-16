@@ -6392,6 +6392,222 @@ MonoBehaviour:
   - TileCoordinate: {x: 25, y: 12}
     TileType: 1
     BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -8, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -7, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -6, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -5, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -4, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -3, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -2, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: -1, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 0, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 1, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 2, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 2, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
   - TileCoordinate: {x: 2, y: -35}
     TileType: 2
     BoolTypeValue: 1
@@ -6402,6 +6618,15 @@ MonoBehaviour:
     TileType: 2
     BoolTypeValue: 1
   - TileCoordinate: {x: 2, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 2, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 3, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 3, y: -36}
     TileType: 2
     BoolTypeValue: 1
   - TileCoordinate: {x: 3, y: -35}
@@ -6416,6 +6641,15 @@ MonoBehaviour:
   - TileCoordinate: {x: 3, y: -32}
     TileType: 2
     BoolTypeValue: 1
+  - TileCoordinate: {x: 3, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
   - TileCoordinate: {x: 4, y: -35}
     TileType: 2
     BoolTypeValue: 1
@@ -6426,6 +6660,15 @@ MonoBehaviour:
     TileType: 2
     BoolTypeValue: 1
   - TileCoordinate: {x: 4, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 4, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 5, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 5, y: -36}
     TileType: 2
     BoolTypeValue: 1
   - TileCoordinate: {x: 5, y: -35}
@@ -6440,6 +6683,15 @@ MonoBehaviour:
   - TileCoordinate: {x: 5, y: -32}
     TileType: 2
     BoolTypeValue: 1
+  - TileCoordinate: {x: 5, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 6, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 6, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
   - TileCoordinate: {x: 6, y: -35}
     TileType: 2
     BoolTypeValue: 1
@@ -6452,6 +6704,15 @@ MonoBehaviour:
   - TileCoordinate: {x: 6, y: -32}
     TileType: 2
     BoolTypeValue: 1
+  - TileCoordinate: {x: 6, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 7, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 7, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
   - TileCoordinate: {x: 7, y: -35}
     TileType: 2
     BoolTypeValue: 1
@@ -6462,6 +6723,30 @@ MonoBehaviour:
     TileType: 2
     BoolTypeValue: 1
   - TileCoordinate: {x: 7, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 7, y: -31}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -37}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -36}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -35}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -34}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -33}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -32}
+    TileType: 2
+    BoolTypeValue: 1
+  - TileCoordinate: {x: 8, y: -31}
     TileType: 2
     BoolTypeValue: 1
   gridWidth: 50

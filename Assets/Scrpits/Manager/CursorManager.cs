@@ -127,6 +127,7 @@ public class CursorManager : MonoBehaviour
 
         if (itemInformation.ItemType == ItemType.Furniture)
         {
+            Debug.Log("Select Build Image");
             _buildImage.gameObject.SetActive(true);
             _buildImage.sprite = itemInformation.ItemOnWorldSprite;
             _buildImage.SetNativeSize();
@@ -222,6 +223,9 @@ public class CursorManager : MonoBehaviour
                         SetCursorInValid();
                     break;
                 case ItemType.Furniture:
+                    _buildImage.gameObject.SetActive(true);
+                    // Debug.Log($"CanPlace Furniture  {currentTile.CanPlaceFurniture}");
+                    // Debug.Log($"Checking Stock  {InventoryManager.Instance.CheckStock(_currentItem.ItemID)}");
                     if (currentTile.CanPlaceFurniture && InventoryManager.Instance.CheckStock(_currentItem.ItemID))
                         SetCursorValid();
                     else

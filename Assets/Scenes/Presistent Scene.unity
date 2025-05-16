@@ -2217,6 +2217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDataListSO: {fileID: 11400000, guid: 502c032531bd27e43992afaae7b45d65, type: 2}
   playerBag: {fileID: 11400000, guid: 1cee40034ca37774c984d47381da9e9b, type: 2}
+  bluePrintData: {fileID: 11400000, guid: e497935305bdd6b40ae5390eecd2f561, type: 2}
   playerCurrency: 1145
 --- !u!4 &1437397876
 Transform:

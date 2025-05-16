@@ -422,7 +422,7 @@ MonoBehaviour:
     ItemPrice: 3
     SellPercentage: 1
   - ItemID: 1035
-    ItemName: "\u6728\u5934\u6905\u5B50\u56FE\u7EB8"
+    ItemName: "\u6905\u5B50\u56FE\u7EB8"
     ItemType: 2
     ItemIcon: {fileID: -1215904961, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
     ItemOnWorldSprite: {fileID: 1773071897, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
@@ -434,7 +434,7 @@ MonoBehaviour:
     ItemPrice: 0
     SellPercentage: 0
   - ItemID: 1036
-    ItemName: "\u6728\u5934\u7BB1\u5B50\u56FE\u7EB8"
+    ItemName: "\u7BB1\u5B50\u56FE\u7EB8"
     ItemType: 2
     ItemIcon: {fileID: -1215904961, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
     ItemOnWorldSprite: {fileID: 21300000, guid: 3775f8176edd949449f110983092e864, type: 3}

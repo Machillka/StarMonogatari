@@ -47,7 +47,7 @@ namespace Farm.Inventory
                 _isOpening = true;
             }
 
-            if ((!_canOpen && _isOpening) || (!_canOpen && InputManager.Instance.IsExitShopButtonPressed))
+            if ((!_canOpen && _isOpening) || (_isOpening && InputManager.Instance.IsExitShopButtonPressed))
             {
                 EventHandler.CallBaseBagCloseEvent(SlotTypes.Box, boxBagData);
                 _isOpening = false;
