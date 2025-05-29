@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace Farm.Inventory
 {
     public class BoxController : MonoBehaviour
@@ -9,7 +8,6 @@ namespace Farm.Inventory
         public InventoryBagSO boxBagData;
 
         public GameObject mouseIconSign;
-
         private bool _canOpen = false;
         private bool _isOpening;
 

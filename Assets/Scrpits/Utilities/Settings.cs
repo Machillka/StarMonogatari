@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 public class Settings
 {
@@ -24,4 +24,8 @@ public class Settings
     public const float gridCellDiagonalSize = 1.41f;
     public const float pixelSize = 0.05f;                           // 20 * 20 的格子占 1 个 unit 的 0.05
     public const float animationBreakTime = 5f;                         // 动画间隔
+
+    public const float lightChangeDuration = 25f;                   // light duration
+    public static TimeSpan morningTime = new TimeSpan(5, 0, 0);
+    public static TimeSpan nightTime = new TimeSpan(19, 0, 0);
 }

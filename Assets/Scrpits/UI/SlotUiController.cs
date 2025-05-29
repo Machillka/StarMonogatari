@@ -171,7 +171,7 @@ namespace Farm.Inventory
                     InventoryManager.Instance.SwapItem(Localtion, SlotIndex, targetSlot.Localtion, targetSlot.SlotIndex);
                 }
                 // 清空高亮
-                    _inventoryUI.UpdateSlotHighlight(-1);
+                _inventoryUI.UpdateSlotHighlight(-1);
             }
             // else
             // {

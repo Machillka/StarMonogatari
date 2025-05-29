@@ -439,7 +439,7 @@ MonoBehaviour:
     ItemIcon: {fileID: -1215904961, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
     ItemOnWorldSprite: {fileID: 21300000, guid: 3775f8176edd949449f110983092e864, type: 3}
     ItemDescription: 
-    ItemUseRadius: 4
+    ItemUseRadius: 1
     CanPickedup: 0
     CanDropped: 1
     CanCarried: 1

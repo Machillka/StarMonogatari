@@ -113,3 +113,8 @@ public class NPCPosition
     public string startSceneName;
     public Vector3 position;
 }
+
+public enum LightShifts
+{
+    Morning, Night
+}

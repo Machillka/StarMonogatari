@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using Farm.Dialog;
 using UnityEngine;
@@ -157,5 +157,11 @@ public class EventHandler
     public static void CallBuildFurnitureEvent(int itemID, Vector3 position)
     {
         BuildFurnitureEvent?.Invoke(itemID, position);
+    }
+
+    public static event Action<Seasons, LightShifts, float> LightShiftChangeEvent;
+    public static void CallLightShiftChangeEvent(Seasons season, LightShifts lightShift, float timeDiff)
+    {
+        LightShiftChangeEvent?.Invoke(season, lightShift, timeDiff);
     }
 }

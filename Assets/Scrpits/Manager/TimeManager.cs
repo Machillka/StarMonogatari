@@ -16,8 +16,16 @@ public class TimeManager : Singleton<TimeManager>
     public bool IsGameClockPause;
 
     private float _tikTime;
+    private float differentTime;                // store the delta of time
 
     public TimeSpan GameTime => new TimeSpan(_gameHour, _gameMinute, _gameSecond);
+
+    private void Start()
+    {
+        EventHandler.CallDataChangeEvent(_gameHour, _gameDay, _monthInSeason, _gameYear, _gameSeason);
+        EventHandler.CallGameMinuteChangeEvent(_gameMinute, _gameHour);
+        EventHandler.CallLightShiftChangeEvent(_gameSeason, GetCurrentLightShift(), differentTime);
+    }
 
     private void Update()
     {
@@ -118,7 +126,25 @@ public class TimeManager : Singleton<TimeManager>
                 EventHandler.CallDataChangeEvent(_gameHour, _gameDay, _gameMonth, _gameYear, _gameSeason);
             }
             EventHandler.CallGameMinuteChangeEvent(_gameMinute, _gameHour);
+            EventHandler.CallLightShiftChangeEvent(_gameSeason, GetCurrentLightShift(), differentTime);
         }
         // Debug.Log("Second" + _gameSecond + "Minnuts:" + _gameMinute);
+    }
+
+    private LightShifts GetCurrentLightShift()
+    {
+        if (GameTime >= Settings.morningTime && GameTime < Settings.nightTime)
+        {
+            differentTime = (float)(GameTime - Settings.morningTime).TotalMinutes;
+            return LightShifts.Morning;
+        }
+
+        if (GameTime < Settings.morningTime || GameTime > Settings.nightTime)
+        {
+            differentTime = (float)(GameTime - Settings.nightTime).TotalMinutes;
+            return LightShifts.Night;
+        }
+
+        return LightShifts.Morning;
     }
 }

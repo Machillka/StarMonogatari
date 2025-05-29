@@ -14,7 +14,6 @@ namespace Farm.Inventory
         public TMP_InputField tradeAmount;
         public Button submitBtn;
         public Button cancelBtn;
-
         private ItemDetails _currentItem;
         private bool _isSellTrade;
 
