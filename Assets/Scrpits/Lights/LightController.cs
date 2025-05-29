@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using DG.Tweening;
 
+
 public class LightController : MonoBehaviour
 {
     public LightDataListSO lightPattenDataset;
