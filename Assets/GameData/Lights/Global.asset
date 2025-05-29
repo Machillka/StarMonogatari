@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2a492beb8fd0246949624739c45b7a, type: 3}
   m_Name: Global
   m_EditorClassIdentifier: 
+  lightDetailsList:
+  - season: 0
+    lightShift: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    lightAmount: 1
+  - season: 0
+    lightShift: 1
+    color: {r: 0.22116414, g: 0.33822283, b: 0.6603774, a: 1}
+    lightAmount: 0.7
